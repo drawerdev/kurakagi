@@ -168,19 +168,29 @@
     <string name="lang_en">English</string>
     <string name="lang_ja">日本語</string>
 
-    <!-- 設定画面: アプリ情報・セキュリティの透明性 -->
-    <string name="settings_about_title">アプリ情報・セキュリティの透明性</string>
-    <string name="about_version_format">バージョン %s</string>
-    <string name="about_app_name_version_format">%1$s v%2$s</string>
-    <string name="about_developer_label">開発者</string>
-    <string name="about_developer_name">drawerdev</string>
-    <string name="about_github_label">GitHub</string>
-    <string name="about_github_url">https://github.com/drawerdev</string>
-    <string name="about_security_heading">データの取り扱いとセキュリティ方針</string>
-    <string name="about_trust_offline">• 完全オフライン生成: TOTP/HOTP 認証コードはすべて端末内で計算され、インターネット接続は不要です。</string>
-    <string name="about_trust_no_ads">• 広告・解析なし: 広告、トラッキング、第三者のアクセス解析SDKは一切含まれていません。</string>
-    <string name="about_trust_network">• 最小限の通信: 通信機能はユーザーが手動でNTP時刻同期を実行した際の時刻取得 (pool.ntp.org) のみに使用され、秘密鍵が外部に送信されることはありません。</string>
+    <!-- 設定画面: 情報（drawerdev のアプリで同じ順番・同じ見出し） -->
+    <string name="settings_about_title">情報</string>
+    <string name="about_app_name_version_format">%1$s %2$s（%3$d）</string>
+    <string name="about_by">by drawerdev</string>
+    <string name="about_tagline">古い Android のためのアプリを作っています</string>
+    <string name="about_official_heading">公式の入手先</string>
+    <string name="about_official_warning">ここ以外から入れたものは、偽物の可能性があります。</string>
+    <string name="about_app_heading">このアプリについて</string>
+    <string name="about_app_promise">通信は時刻合わせ（pool.ntp.org への SNTP）だけで、NTP のボタンを押したときだけです。鍵は送りません。広告・追跡なし。</string>
+    <string name="about_trust_offline">• コードはこの端末の中で計算します。インターネットにつなぐ必要はありません。</string>
     <string name="about_trust_storage">• 保存: 鍵はこのアプリ専用の領域に保存します。暗号化はしていません（古い Android には鍵を守る仕組みが無いため）。ほかのアプリからは読めませんが、root 化した端末やロックを解除された端末からは読めます。クラウドへの自動バックアップは無効です。バックアップは必ずパスワードで暗号化します。</string>
-    <string name="about_github_open_error">ブラウザを開けませんでした</string>
-    <string name="about_github_copied">GitHub URLをクリップボードにコピーしました</string>
+    <string name="about_report_heading">問題の報告</string>
+    <string name="about_report_desc">エラー報告に入るのは、アプリの版・Android の版・機種名だけです。シークレットやアカウントの名前は入りません。</string>
+    <string name="about_report_copy">エラー報告をコピー</string>
+    <string name="about_report_copied">コピーしました。新しい issue に貼ってください。</string>
+    <string name="about_report_copy_failed">コピーできませんでした</string>
+    <string name="about_report_where">報告先:</string>
+    <string name="about_report_device_format">機種: %1$s %2$s</string>
+    <string name="about_other_heading">ほかのアプリ</string>
+    <string name="about_other_mataoto">• Mataoto — 音楽プレイヤー兼ホーム（Android 5.0 以上）</string>
+    <string name="about_other_mataoto_lite">• Mataoto Lite — Mataoto の軽量版（Android 2.1 以上）</string>
+    <string name="about_other_hauntchat">• HauntChat — 古い端末でも使える AI チャット（Android 2.3 以上）</string>
+    <string name="about_license_heading">ライセンス</string>
+    <string name="about_license_text">GPL-3.0-or-later。ソースは GitHub にあります: github.com/drawerdev/kurakagi</string>
+    <string name="about_license_parts">QR コードに ZXing core 2.3.0（Apache-2.0）を使っています。</string>
 </resources>

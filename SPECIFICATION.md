@@ -45,7 +45,7 @@
 | `ui` | `ScanActivity` | QR スキャン画面（縦画面カメラ制御、照準 HUD、オートフォーカス、エラーデバウンス） |
 | `ui` | `ManualAddActivity` | 手動登録画面（シークレット・発行元・桁数・アルゴリズム・周期入力） |
 | `ui` | `TokenDetailActivity` | トークン詳細画面（シークレット確認／コピー、QR コード再生成表示、削除） |
-| `ui` | `SettingsActivity` | 設定画面（手動オフセット設定、SNTP 同期、JSON エクスポート／インポート） |
+| `ui` | `SettingsActivity` | 設定画面（手動オフセット設定、SNTP 同期、暗号化バックアップの書き出し／読み込み、テーマ・言語、一番下に「情報」） |
 | `ui` | `TokenAdapter` | トークンカード用リストアダプター（タップコピー、展開式3連コード切替、プログレス更新） |
 | `ui` | `TokenStorageHelper` | `SharedPreferences` によるローカル暗号化／JSON データ永続化ヘルパー |
 | `ui` | `ViewFinderView` | カスタム照準枠ビュー（シアン角丸コーナー、レーザーライン、半透明マスク描画） |

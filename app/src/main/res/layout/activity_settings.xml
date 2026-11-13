@@ -357,7 +357,7 @@
 
             </LinearLayout>
 
-            <!-- 5. アプリ情報・セキュリティの透明性カード -->
+            <!-- 5. 情報（APP-RULES の「情報の画面」。drawerdev のアプリで同じ順番・同じ見出し） -->
             <LinearLayout
                 android:id="@+id/layout_settings_about_card"
                 android:layout_width="fill_parent"
@@ -369,7 +369,7 @@
 
                 <TextView
                     android:id="@+id/tv_settings_about_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_about_title"
                     android:textColor="@color/text_primary"
@@ -385,79 +385,99 @@
                     android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_by"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_by"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="2dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_tagline"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_tagline"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
                     android:layout_marginBottom="6dp" />
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
-
-                    <TextView
-                        android:id="@+id/tv_about_developer_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/about_developer_label"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp"
-                        android:layout_marginRight="8dp" />
-
-                    <TextView
-                        android:id="@+id/tv_about_developer_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/about_developer_name"
-                        android:textColor="@color/text_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_about_github"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_slot_box"
-                    android:padding="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:id="@+id/tv_about_github_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/about_github_label"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="11sp"
-                        android:layout_marginBottom="2dp" />
-
-                    <TextView
-                        android:id="@+id/tv_about_github_url"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/about_github_url"
-                        android:textColor="@color/accent_cyan"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
                 <View
-                    android:id="@+id/v_about_divider"
+                    android:id="@+id/tv_about_official_heading_divider"
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:background="@color/divider_color"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp" />
 
                 <TextView
-                    android:id="@+id/tv_about_security_heading"
+                    android:id="@+id/tv_about_official_heading"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/about_security_heading"
+                    android:text="@string/about_official_heading"
                     android:textColor="@color/text_primary"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_official_site"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_official_site"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
                     android:layout_marginBottom="8dp" />
+
+                <!-- 白い地の上に QR を置く。余白（4 マス）は画像の中に含める -->
+                <ImageView
+                    android:id="@+id/iv_about_official_qr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="center"
+                    android:contentDescription="@string/about_official_site"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_official_warning"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_official_warning"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:id="@+id/tv_about_app_heading_divider"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_app_heading"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_app_heading"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_app_promise"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_app_promise"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="6dp" />
 
                 <TextView
                     android:id="@+id/tv_about_trust_offline"
@@ -469,30 +489,150 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
-                    android:id="@+id/tv_about_trust_no_ads"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_trust_no_ads"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="11sp"
-                    android:layout_marginBottom="6dp" />
-
-                <TextView
-                    android:id="@+id/tv_about_trust_network"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_trust_network"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="11sp"
-                    android:layout_marginBottom="6dp" />
-
-                <TextView
                     android:id="@+id/tv_about_trust_storage"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/about_trust_storage"
                     android:textColor="@color/text_secondary"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:id="@+id/tv_about_report_heading_divider"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_report_heading"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_report_heading"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_report_desc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_report_desc"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/btn_about_copy_report"
+                    android:layout_width="fill_parent"
+                    android:layout_height="42dp"
+                    android:text="@string/about_report_copy"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:background="@drawable/bg_btn_secondary"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_report_where"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_report_where"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="2dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_report_url"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_report_url"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:id="@+id/tv_about_other_heading_divider"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_other_heading"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_other_heading"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_other_mataoto"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_other_mataoto"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_other_mataoto_lite"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_other_mataoto_lite"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_other_hauntchat"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_other_hauntchat"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:id="@+id/tv_about_license_heading_divider"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_license_heading"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_license_heading"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_license_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_license_text"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_license_parts"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_license_parts"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="0dp" />
 
             </LinearLayout>
 

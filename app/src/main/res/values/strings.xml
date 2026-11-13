@@ -168,19 +168,32 @@
     <string name="lang_en">English</string>
     <string name="lang_ja">日本語</string>
 
-    <!-- Settings Screen: About & Trust -->
-    <string name="settings_about_title">About &amp; Security Transparency</string>
-    <string name="about_version_format">Version %s</string>
-    <string name="about_app_name_version_format">%1$s v%2$s</string>
-    <string name="about_developer_label">Developer</string>
-    <string name="about_developer_name">drawerdev</string>
-    <string name="about_github_label">GitHub</string>
-    <string name="about_github_url">https://github.com/drawerdev</string>
-    <string name="about_security_heading">How Kurakagi Handles Your Data</string>
-    <string name="about_trust_offline">• Offline OTP Generation: All TOTP/HOTP codes are calculated locally on your device without an internet connection.</string>
-    <string name="about_trust_no_ads">• No Ads or Analytics: Contains no advertisements, trackers, or third-party analytics SDKs.</string>
-    <string name="about_trust_network">• Minimal Network Use: Network access is used solely for NTP clock sync (pool.ntp.org) when you manually initiate it. Your keys never leave the device.</string>
+    <!-- Settings Screen: About (same order and headings in every drawerdev app) -->
+    <string name="settings_about_title">About</string>
+    <string name="about_app_name_version_format">%1$s %2$s (%3$d)</string>
+    <string name="about_by">by drawerdev</string>
+    <string name="about_tagline">Apps for old Android phones</string>
+    <string name="about_official_heading">Official download</string>
+    <string name="about_official_site" translatable="false">drawerdev.github.io</string>
+    <string name="about_official_qr_url" translatable="false">https://drawerdev.github.io/</string>
+    <string name="about_official_warning">Copies from anywhere else may be fake.</string>
+    <string name="about_app_heading">About this app</string>
+    <string name="about_app_promise">The only network use is the clock sync (SNTP to pool.ntp.org), and only when you press the NTP button. Your keys are never sent. No ads, no tracking.</string>
+    <string name="about_trust_offline">• Codes are calculated on this phone. No internet connection is needed.</string>
     <string name="about_trust_storage">• Storage: Keys are kept in this app\'s private storage, NOT encrypted (old Android has no hardware key store). Other apps cannot read it, but a rooted or unlocked phone can. Cloud auto-backup is off. Backups are always encrypted with your password.</string>
-    <string name="about_github_open_error">Could not open browser</string>
-    <string name="about_github_copied">Copied GitHub URL to clipboard</string>
+    <string name="about_report_heading">Report a problem</string>
+    <string name="about_report_desc">The error report has only the app version, the Android version and the device model. No secrets and no account names.</string>
+    <string name="about_report_copy">Copy error report</string>
+    <string name="about_report_copied">Copied. Paste it into a new issue.</string>
+    <string name="about_report_copy_failed">Could not copy</string>
+    <string name="about_report_where">Report to:</string>
+    <string name="about_report_url" translatable="false">https://github.com/drawerdev/kurakagi/issues</string>
+    <string name="about_report_device_format">Device: %1$s %2$s</string>
+    <string name="about_other_heading">Other apps</string>
+    <string name="about_other_mataoto">• Mataoto — a music player and home screen (Android 5.0 and later)</string>
+    <string name="about_other_mataoto_lite">• Mataoto Lite — a lighter version of Mataoto (Android 2.1 and later)</string>
+    <string name="about_other_hauntchat">• HauntChat — an AI chat app that works on old phones too (Android 2.3 and later)</string>
+    <string name="about_license_heading">License</string>
+    <string name="about_license_text">GPL-3.0-or-later. The source code is on GitHub: github.com/drawerdev/kurakagi</string>
+    <string name="about_license_parts">Uses ZXing core 2.3.0 (Apache-2.0) for QR codes.</string>
 </resources>

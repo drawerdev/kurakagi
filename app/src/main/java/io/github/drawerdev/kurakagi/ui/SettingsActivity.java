@@ -7,17 +7,19 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.ClipboardManager;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -25,6 +27,8 @@ import android.widget.Toast;
 
 import io.github.drawerdev.kurakagi.R;
 import io.github.drawerdev.kurakagi.core.TimeSyncManager;
+import io.github.drawerdev.kurakagi.qr.QrEncoder;
+import io.github.drawerdev.kurakagi.qr.QrMatrix;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,11 +40,12 @@ import java.util.Arrays;
 
 /**
  * 設定画面。
- * 時刻補正、SDカードバックアップ・復元、テーマ・言語切替、アプリ情報・セキュリティの透明性。
+ * 時刻補正、SDカードバックアップ・復元、テーマ・言語切替、情報（一番下）。
  */
 public class SettingsActivity extends Activity {
 
-    private static final String APP_VERSION = "1.0.1";
+    /** QR の周りの白い余白。規格どおり 4 マス。 */
+    private static final int OFFICIAL_QR_QUIET_ZONE = 4;
     private static final String EXTRA_SCROLL_Y = "extra_scroll_y";
     private static final String STATE_SCROLL_Y = "state_scroll_y";
 
@@ -84,19 +89,47 @@ public class SettingsActivity extends Activity {
     private Button btnLangJa;
 
     private View layoutAboutCard;
-    private TextView tvAboutTitle;
     private TextView tvAboutAppVersion;
-    private TextView tvAboutDeveloperLabel;
-    private TextView tvAboutDeveloperName;
-    private View layoutAboutGithub;
-    private TextView tvAboutGithubLabel;
-    private TextView tvAboutGithubUrl;
-    private View vAboutDivider;
-    private TextView tvAboutSecurityHeading;
-    private TextView tvAboutTrustOffline;
-    private TextView tvAboutTrustNoAds;
-    private TextView tvAboutTrustNetwork;
-    private TextView tvAboutTrustStorage;
+    private ImageView ivAboutOfficialQr;
+    private Button btnAboutCopyReport;
+
+    /** 情報のカードの見出しと強めの文字（textPrimary）。 */
+    private static final int[] ABOUT_PRIMARY_TEXT_IDS = {
+            R.id.tv_settings_about_title,
+            R.id.tv_about_app_version,
+            R.id.tv_about_official_heading,
+            R.id.tv_about_official_site,
+            R.id.tv_about_app_heading,
+            R.id.tv_about_app_promise,
+            R.id.tv_about_report_heading,
+            R.id.tv_about_report_url,
+            R.id.tv_about_other_heading,
+            R.id.tv_about_license_heading,
+    };
+
+    /** 情報のカードの本文（textSecondary）。 */
+    private static final int[] ABOUT_SECONDARY_TEXT_IDS = {
+            R.id.tv_about_by,
+            R.id.tv_about_tagline,
+            R.id.tv_about_official_warning,
+            R.id.tv_about_trust_offline,
+            R.id.tv_about_trust_storage,
+            R.id.tv_about_report_desc,
+            R.id.tv_about_report_where,
+            R.id.tv_about_other_mataoto,
+            R.id.tv_about_other_mataoto_lite,
+            R.id.tv_about_other_hauntchat,
+            R.id.tv_about_license_text,
+            R.id.tv_about_license_parts,
+    };
+
+    private static final int[] ABOUT_DIVIDER_IDS = {
+            R.id.tv_about_official_heading_divider,
+            R.id.tv_about_app_heading_divider,
+            R.id.tv_about_report_heading_divider,
+            R.id.tv_about_other_heading_divider,
+            R.id.tv_about_license_heading_divider,
+    };
 
     private Button btnBack;
 
@@ -117,11 +150,8 @@ public class SettingsActivity extends Activity {
         timeSyncManager = TimeSyncManager.getInstance(this);
 
         bindViews();
-        tvAboutAppVersion.setText(getString(
-                R.string.about_app_name_version_format,
-                getString(R.string.app_name),
-                APP_VERSION
-        ));
+        tvAboutAppVersion.setText(appNameAndVersion());
+        showOfficialQr();
 
         applyTheme();
         updateOffsetDisplay();
@@ -221,26 +251,15 @@ public class SettingsActivity extends Activity {
         btnLangJa = (Button) findViewById(R.id.btn_lang_ja);
 
         layoutAboutCard = findViewById(R.id.layout_settings_about_card);
-        tvAboutTitle = (TextView) findViewById(R.id.tv_settings_about_title);
         tvAboutAppVersion = (TextView) findViewById(R.id.tv_about_app_version);
-        tvAboutDeveloperLabel = (TextView) findViewById(R.id.tv_about_developer_label);
-        tvAboutDeveloperName = (TextView) findViewById(R.id.tv_about_developer_name);
-        layoutAboutGithub = findViewById(R.id.layout_about_github);
-        tvAboutGithubLabel = (TextView) findViewById(R.id.tv_about_github_label);
-        tvAboutGithubUrl = (TextView) findViewById(R.id.tv_about_github_url);
-        vAboutDivider = findViewById(R.id.v_about_divider);
-        tvAboutSecurityHeading = (TextView) findViewById(R.id.tv_about_security_heading);
-        tvAboutTrustOffline = (TextView) findViewById(R.id.tv_about_trust_offline);
-        tvAboutTrustNoAds = (TextView) findViewById(R.id.tv_about_trust_no_ads);
-        tvAboutTrustNetwork = (TextView) findViewById(R.id.tv_about_trust_network);
-        tvAboutTrustStorage = (TextView) findViewById(R.id.tv_about_trust_storage);
+        ivAboutOfficialQr = (ImageView) findViewById(R.id.iv_about_official_qr);
+        btnAboutCopyReport = (Button) findViewById(R.id.btn_about_copy_report);
     }
 
     private void applyTheme() {
         int textPrimary = ThemeManager.getTextPrimaryColor(this);
         int textSecondary = ThemeManager.getTextSecondaryColor(this);
         int textMuted = ThemeManager.getTextMutedColor(this);
-        int accentPrimary = ThemeManager.getAccentPrimaryColor(this);
         int dividerColor = ThemeManager.getDividerColor(this);
         int cardBgRes = ThemeManager.getCardBgRes(this);
         int slotBgRes = ThemeManager.getSlotBoxBgRes(this);
@@ -309,21 +328,17 @@ public class SettingsActivity extends Activity {
         styleOptionButton(btnLangJa, LocaleHelper.LANG_JA.equals(currentLang),
                 primaryBtnBgRes, secondaryBtnBgRes, primaryBtnText, secondaryBtnText);
 
-        tvAboutTitle.setTextColor(textPrimary);
-        tvAboutAppVersion.setTextColor(textPrimary);
-        tvAboutDeveloperLabel.setTextColor(textSecondary);
-        tvAboutDeveloperName.setTextColor(textPrimary);
-
-        setBackgroundKeepPadding(layoutAboutGithub, slotBgRes);
-        tvAboutGithubLabel.setTextColor(textSecondary);
-        tvAboutGithubUrl.setTextColor(accentPrimary);
-
-        vAboutDivider.setBackgroundColor(dividerColor);
-        tvAboutSecurityHeading.setTextColor(textPrimary);
-        tvAboutTrustOffline.setTextColor(textSecondary);
-        tvAboutTrustNoAds.setTextColor(textSecondary);
-        tvAboutTrustNetwork.setTextColor(textSecondary);
-        tvAboutTrustStorage.setTextColor(textSecondary);
+        for (int id : ABOUT_PRIMARY_TEXT_IDS) {
+            ((TextView) findViewById(id)).setTextColor(textPrimary);
+        }
+        for (int id : ABOUT_SECONDARY_TEXT_IDS) {
+            ((TextView) findViewById(id)).setTextColor(textSecondary);
+        }
+        for (int id : ABOUT_DIVIDER_IDS) {
+            findViewById(id).setBackgroundColor(dividerColor);
+        }
+        setBackgroundKeepPadding(btnAboutCopyReport, secondaryBtnBgRes);
+        btnAboutCopyReport.setTextColor(secondaryBtnText);
     }
 
     private void styleOptionButton(Button button, boolean selected,
@@ -471,22 +486,14 @@ public class SettingsActivity extends Activity {
             }
         });
 
-        // GitHub URL
-        layoutAboutGithub.setOnClickListener(new View.OnClickListener() {
+        // 情報: エラー報告をコピー
+        btnAboutCopyReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGithubUrl();
-            }
-        });
-
-        layoutAboutGithub.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (copyToClipboard(getString(R.string.about_github_url))) {
-                    Toast.makeText(SettingsActivity.this, R.string.about_github_copied, Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
+                boolean ok = ClipboardCompat.copy(SettingsActivity.this, "error report", buildErrorReport(), false);
+                Toast.makeText(SettingsActivity.this,
+                        ok ? R.string.about_report_copied : R.string.about_report_copy_failed,
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -523,35 +530,48 @@ public class SettingsActivity extends Activity {
         overridePendingTransition(0, 0);
     }
 
-    private void openGithubUrl() {
-        String url = getString(R.string.about_github_url);
+    // ---------------------------------------------------------------------------------------------
+    // 情報
+    // ---------------------------------------------------------------------------------------------
+
+    /** 「Kurakagi 1.0.1 (2)」。版はパッケージの情報から取る（ビルドの設定と食い違わない）。 */
+    private String appNameAndVersion() {
+        String name = "?";
+        int code = 0;
         try {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(intent);
-        } catch (Exception e) {
-            if (copyToClipboard(url)) {
-                Toast.makeText(
-                        this,
-                        getString(R.string.about_github_open_error) + "\n" + getString(R.string.about_github_copied),
-                        Toast.LENGTH_LONG
-                ).show();
-            } else {
-                Toast.makeText(this, R.string.about_github_open_error, Toast.LENGTH_SHORT).show();
-            }
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+            name = info.versionName;
+            code = info.versionCode;
+        } catch (Exception ignored) {
+            // 自分のパッケージは必ずあるが、念のため
         }
+        return getString(R.string.about_app_name_version_format, getString(R.string.app_name), name, code);
     }
 
-    @SuppressWarnings("deprecation")
-    private boolean copyToClipboard(String text) {
+    /**
+     * エラー報告。アプリの版・Android の版・機種名だけ。
+     * シークレット・アカウントの名前・時刻の補正など、利用者のデータは入れない。
+     */
+    private String buildErrorReport() {
+        return appNameAndVersion() + "\n"
+                + "Android " + Build.VERSION.RELEASE + " (API " + Build.VERSION.SDK_INT + ")\n"
+                + getString(R.string.about_report_device_format, Build.MANUFACTURER, Build.MODEL);
+    }
+
+    /** 公式の入手先の QR。白い地に黒、周りに 4 マスの余白。リンクにはしない。 */
+    private void showOfficialQr() {
         try {
-            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            if (cm != null) {
-                cm.setText(text);
-                return true;
-            }
-        } catch (Exception ignored) {
+            QrMatrix matrix = QrEncoder.encode(getString(R.string.about_official_qr_url),
+                    QrEncoder.ErrorCorrectionLevel.M);
+            float density = getResources().getDisplayMetrics().density;
+            int scale = Math.max(2, Math.round(3 * density));
+            int side = (matrix.getWidth() + 2 * OFFICIAL_QR_QUIET_ZONE) * scale;
+            int[] pixels = matrix.toPixelArray(scale, OFFICIAL_QR_QUIET_ZONE, Color.BLACK, Color.WHITE);
+            ivAboutOfficialQr.setImageBitmap(Bitmap.createBitmap(pixels, side, side, Bitmap.Config.RGB_565));
+        } catch (Exception e) {
+            // QR が描けなくても、文字の入手先は出ている
+            ivAboutOfficialQr.setVisibility(View.GONE);
         }
-        return false;
     }
 
     private void updateOffsetDisplay() {

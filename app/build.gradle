@@ -76,6 +76,15 @@ android {
         }
     }
 
+    lint {
+        // Using an API above minSdk 7 without a version check must stop the build.
+        error += ['NewApi']
+        abortOnError = true
+        // PropertyEscape only fires on local.properties, which each PC writes and git never sees.
+        // Keep it as a warning so it cannot stop the build on one machine.
+        warning += ['PropertyEscape']
+    }
+
     testOptions {
         unitTests.all {
             testLogging {

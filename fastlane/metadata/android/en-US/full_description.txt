@@ -1,0 +1,18 @@
+Kurakagi is an offline two-factor authentication (TOTP) app for old Android phones. It turns an old phone into a dedicated device for your one-time codes. It is written in plain Java with the standard Android View toolkit and runs from Android 2.1 up.
+
+<b>What it does</b>
+<ul>
+<li>Shows three codes at once (previous, current and next 30 seconds), so a phone whose clock is a little off still works. The clock can also be corrected by hand.</li>
+<li>Adds accounts by scanning a QR code or by typing the secret. Shows an account's secret or QR code again so you can copy it to another device. Those screens block screenshots.</li>
+<li>Exports all accounts to one file, always encrypted with your password (PBKDF2-HMAC-SHA256, AES-256-CBC, HMAC-SHA256 to detect tampering).</li>
+<li>English and Japanese.</li>
+</ul>
+
+<b>What it does not do</b>
+<ul>
+<li>No ads, no tracking.</li>
+<li>The only network use is the clock sync (SNTP to pool.ntp.org), and only when you press the NTP button. Your keys are never sent.</li>
+<li>The keys on the phone are kept in the app's private storage but are not encrypted: old Android has no safe place to keep a key. A rooted or unlocked phone can read them. Use the phone as a dedicated device that stays off the network.</li>
+</ul>
+
+Supported range: Android 2.1 and later.
