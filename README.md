@@ -115,4 +115,8 @@ powershell -ExecutionPolicy Bypass -File .\build_apk.ps1
 ---
 
 ## 📜 ライセンス
-Apache License 2.0
+Apache License 2.0（[LICENSE](LICENSE)）。Copyright 2026 drawerdev。
+
+使っている第三者のもの（詳しくは [NOTICE](NOTICE)）:
+* **ZXing Core 2.3.0**（`app/libs/core-2.3.0.jar`）: QR の読み書き。Apache License 2.0
+* `app/src/test/java/org/json/`: テストを PC で動かすための最小限の代用品で、アプリには入りません。エラーの文言の一部が JSON-java（Public Domain）と同じです

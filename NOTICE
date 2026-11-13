@@ -1,0 +1,14 @@
+Kurakagi
+Copyright 2026 drawerdev
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product includes software developed by the ZXing authors:
+  ZXing Core 2.3.0 (app/libs/core-2.3.0.jar)
+  https://github.com/zxing/zxing
+  Licensed under the Apache License, Version 2.0.
+
+The test-only files under app/src/test/java/org/json/ are a minimal
+stand-in for Android's org.json, used to run the unit tests on a desktop
+JVM. They are not part of the app. Some error messages match JSON-java
+(https://github.com/stleary/JSON-java), which is in the Public Domain.

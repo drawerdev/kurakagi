@@ -1,3 +1,8 @@
+/*
+ * Test-only minimal stand-in for Android's org.json, so the unit tests run on a desktop JVM.
+ * Not part of the app (build_apk.ps1 compiles app/src/main only). Some error messages match
+ * JSON-java (https://github.com/stleary/JSON-java), which is in the Public Domain. See NOTICE.
+ */
 package org.json;
 
 import java.util.HashMap;
