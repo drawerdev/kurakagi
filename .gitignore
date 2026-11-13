@@ -3,13 +3,24 @@
 *.jks
 *.idsig
 
+# Gradle と Android Studio
+.gradle/
+local.properties
+.idea/
+*.iml
+
 # ビルドの出力
 build/
-build_test/
-dist/
-*.class
 *.apk
+*.aab
+*.ap_
+*.dex
+*.class
 
-# 試作のときの残り（使っていない）。ZXing は app/libs/ のものだけを使う
-/core-*.jar
-/ZxingTest.java
+# 1.0.x のときの手作業のビルドの出力（今は使わない。dist/ には 1.0.1 の署名済み APK がある）
+dist/
+build_test/
+
+# リポジトリに jar を置かない（依存は Maven から取る）。gradle-wrapper.jar だけは例外
+*.jar
+!gradle/wrapper/gradle-wrapper.jar

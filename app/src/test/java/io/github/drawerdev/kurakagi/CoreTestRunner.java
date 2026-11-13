@@ -27,6 +27,20 @@ public class CoreTestRunner {
     private static int testsFailed = 0;
 
     public static void main(String[] args) {
+        int[] result = run();
+        if (result[1] > 0) {
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Runs every check and returns {run, failed}. Called by {@link HandWrittenTests} from
+     * {@code gradlew test}, and by {@link #main} when run with the plain java command.
+     */
+    public static int[] run() {
+        testsRun = 0;
+        testsPassed = 0;
+        testsFailed = 0;
         System.out.println("=================================================");
         System.out.println("   Kurakagi Core Engine Unit Tests (API 7 Pure Java)   ");
         System.out.println("=================================================");
@@ -50,10 +64,10 @@ public class CoreTestRunner {
 
         if (testsFailed > 0) {
             System.err.println("SOME TESTS FAILED!");
-            System.exit(1);
         } else {
             System.out.println("ALL TESTS PASSED SUCCESSFULLY! (100% OK)");
         }
+        return new int[] { testsRun, testsFailed };
     }
 
     private static void assertEquals(String testName, Object expected, Object actual) {

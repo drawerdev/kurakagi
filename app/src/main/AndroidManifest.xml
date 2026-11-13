@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.drawerdev.kurakagi"
-    android:versionCode="2"
-    android:versionName="1.0.1">
-
-    <uses-sdk
-        android:minSdkVersion="7"
-        android:targetSdkVersion="34" />
+<!-- applicationId・versionCode・versionName・minSdk・targetSdk は app/build.gradle にある -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 任意: SNTP 時刻補正用（完全オフライン運用時は不使用でも動作可能） -->
     <uses-permission android:name="android.permission.INTERNET" />

@@ -136,16 +136,16 @@
 
 ## 6. ビルド・テスト・実機検証結果
 
-### 6.1 ビルドパイプライン (`build_apk.ps1`)
-1. `aapt2 compile` & `aapt2 link`（`--min-sdk-version 7 --target-sdk-version 34`）
-2. `javac -source 1.8 -target 1.8`（`android-34/android.jar` + `app/libs/core-2.3.0.jar`）
-3. `jar` パッケージング
-4. `d8 --min-api 7` によるアプリクラスと ZXing 2.3.0 の単一 `classes.dex` 化
-5. `aapt add` & `zipalign -f -p 4`
-6. `apksigner` による多重署名（v1 JAR署名 + v2 + v3 署名有効）
-- **生成物**: `dist/Kurakagi-release.apk`（サイズ: `329,954 bytes`）
+### 6.1 ビルド (Gradle)
+- Gradle 8.13（Wrapper を同梱）＋ Android Gradle Plugin 8.13.2。`compileSdk 34`・`minSdk 7`・`targetSdk 34`・`versionCode 2`・`versionName 1.0.1`
+- Java 8 のソース・バイトコードで書き、D8 が `min-api 7` で 1 つの `classes.dex` にする（コードの縮小・難読化はしない）
+- ZXing は Maven Central の `com.google.zxing:core:2.3.0`（1.0.1 まで同梱していた jar と同じ物。SHA-256 で確認）
+- リリース版の署名: v1 (JAR) + v2 + v3。鍵とパスワードは `~/.gradle/gradle.properties` の `KURAKAGI_*` から読み、無ければ署名なしの APK を作る
+- 単体テスト: `gradlew test` が `HandWrittenTests`（JUnit 4）から `CoreTestRunner` と `ComprehensiveVerificationTest` を走らせる
+- **生成物**: `app/build/outputs/apk/release/app-release.apk`（署名後 約 370 KB。2026-11-14 に試しの鍵で 368,733 bytes）
 
 ### 6.2 自動テスト結果
+- **単体テスト (`CoreTestRunner`)**: **107 / 107 テスト PASS (100%)**
 - **包括的検証スイート (`ComprehensiveVerificationTest`)**: **97 / 97 テスト PASS (100%)**
   - RFC 6238 公式テストベクター（6桁 / 8桁、2038年問題超え 64bit、ゼロパディング）
   - Base32 エッジケース（小文字、ハイフン・空白混在、パディング欠如、不正文字防御）

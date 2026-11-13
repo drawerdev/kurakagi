@@ -31,6 +31,21 @@ public class ComprehensiveVerificationTest {
     private static final List<String> failureDetails = new ArrayList<String>();
 
     public static void main(String[] args) {
+        int[] result = run();
+        if (result[1] > 0) {
+            System.exit(1);
+        }
+    }
+
+    /**
+     * 全項目を走らせ、{実行数, 失敗数} を返す。{@code gradlew test} では {@link HandWrittenTests} から、
+     * java コマンドで直接走らせるときは {@link #main} から呼ばれる。
+     */
+    public static int[] run() {
+        totalTests = 0;
+        passedTests = 0;
+        failedTests = 0;
+        failureDetails.clear();
         System.out.println("======================================================================");
         System.out.println("   Kurakagi 包括的自動テスト＆検証スイート (API 7 / RFC 6238 / Pure Java)   ");
         System.out.println("======================================================================");
@@ -60,10 +75,10 @@ public class ComprehensiveVerificationTest {
             for (int i = 0; i < failureDetails.size(); i++) {
                 System.err.println("  " + failureDetails.get(i));
             }
-            System.exit(1);
         } else {
             System.out.println("\n全テストに合格しました！ (ALL TESTS PASSED)");
         }
+        return new int[] { totalTests, failedTests };
     }
 
     private static void assertEquals(String testName, Object expected, Object actual) {

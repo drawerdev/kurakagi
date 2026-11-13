@@ -1,12 +1,21 @@
 Kurakagi
-Copyright 2026 drawerdev
+Copyright (C) 2026 drawerdev
 
-Licensed under the Apache License, Version 2.0 (see LICENSE).
+This program is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version (SPDX-License-Identifier: GPL-3.0-or-later).
+See LICENSE for the full text.
 
 This product includes software developed by the ZXing authors:
-  ZXing Core 2.3.0 (app/libs/core-2.3.0.jar)
+  ZXing Core 2.3.0 (com.google.zxing:core:2.3.0 from Maven Central)
   https://github.com/zxing/zxing
   Licensed under the Apache License, Version 2.0.
+  https://www.apache.org/licenses/LICENSE-2.0
+
+The Gradle Wrapper (gradlew, gradlew.bat, gradle/wrapper/) is part of
+Gradle, licensed under the Apache License, Version 2.0. It is used only to
+build the app and is not part of the app.
 
 The test-only files under app/src/test/java/org/json/ are a minimal
 stand-in for Android's org.json, used to run the unit tests on a desktop

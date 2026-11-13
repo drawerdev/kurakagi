@@ -11,8 +11,8 @@
 * **対応範囲 (minSdk)**: Android 2.1 Eclair (API 7) 以上
 * **動作確認済み**: 下の「動作確認済みの端末」の表を参照。表に無い版は未確認
 * **ターゲット環境 (targetSdk)**: Android 14 (API 34)
-* **アプリサイズ**: 約 390 KB。Java と Android 標準の部品だけで書き、外部ライブラリは QR の読み書きに使う ZXing 2.3.0 だけ
-* **署名**: apksigner で v1 (JAR 署名) + v2 + v3
+* **アプリサイズ**: 約 370 KB。Java と Android 標準の部品だけで書き、外部ライブラリは QR の読み書きに使う ZXing 2.3.0 だけ
+* **署名**: v1 (JAR 署名) + v2 + v3
 
 ### 2. 鍵の多重化・バックアップ機能（端末突然死対策）
 * **シークレットの確認・コピー**: 登録済みアカウントの Base32 シークレットを表示・コピーできます（紙の控え用）。この画面はスクリーンショットと画面録画を禁止しています。Android 13 以降では、コピーした内容をクリップボードのプレビューに出しません。
@@ -89,34 +89,50 @@ Kurakagi/
 │   │   │       ├── layout/         # 画面レイアウト XML
 │   │   │       └── values/         # strings, colors, styles
 │   │   └── test/java/io/github/drawerdev/kurakagi/
-│   │       └── CoreTestRunner.java # 純粋Java単体テスト実行クラス (107件全PASS)
-├── build_apk.ps1                   # 完全自動ビルドスクリプト
-└── dist/
-    └── Kurakagi-release.apk       # 完成署名済みリリース APK
+│   │       ├── CoreTestRunner.java                # 純粋Java単体テスト (107件)
+│   │       ├── ComprehensiveVerificationTest.java # 包括的検証 (97件)
+│   │       └── HandWrittenTests.java              # 上の 2 つを gradlew test から走らせる
+│   └── build.gradle                # minSdk 7 / targetSdk 34、ZXing 2.3.0、署名の設定
+├── build.gradle, settings.gradle, gradle.properties
+└── gradlew, gradlew.bat, gradle/wrapper/  # Gradle Wrapper（Gradle 8.13）
 ```
 
 ---
 
 ## 🛠 ビルド方法
 
-### 単体テストの実行
-```powershell
-javac -encoding UTF-8 -cp app/libs/core-2.3.0.jar -d build_test @sources_core.txt
-java -cp "build_test;app/libs/core-2.3.0.jar" io.github.drawerdev.kurakagi.CoreTestRunner
-```
-> 107 件（RFC 4226/6238、Base32、バックアップ形式 v2 の改ざん検出、PBKDF2-HMAC-SHA256 の RFC 7914 の値、QR、SNTP など）。全件 PASS。
+JDK 17 以上と Android SDK（Platform 34）が要ります。SDK の場所は環境変数 `ANDROID_HOME` か、`local.properties` の `sdk.dir` で指定します（`local.properties` はリポジトリに入れません）。ZXing は Maven Central から取るので、リポジトリに jar は置いていません。
 
-### APK パッケージのビルド
-```powershell
-powershell -ExecutionPolicy Bypass -File .\build_apk.ps1
+### 単体テストの実行
+```bash
+./gradlew test
 ```
-> 署名鍵とパスワードはソースのフォルダに置きません。鍵は環境変数 `KURAKAGI_KEYSTORE`（無ければ `%USERPROFILE%\keys\kurakagi.keystore`）、パスワードは `KURAKAGI_KS_PASS`（無ければ実行時に入力）。`dist/Kurakagi-release.apk` に v1 + v2 + v3 で署名した APK ができます。
+> `CoreTestRunner` 107 件（RFC 4226/6238、Base32、バックアップ形式 v2 の改ざん検出、PBKDF2-HMAC-SHA256 の RFC 7914 の値、QR、SNTP など）と `ComprehensiveVerificationTest` 97 件。全件 PASS。1 件ごとの結果は `app/build/reports/tests/` にあります。Windows では `gradlew.bat test`。
+
+### APK のビルド
+```bash
+./gradlew assembleDebug     # app/build/outputs/apk/debug/app-debug.apk（デバッグ用の鍵で署名）
+./gradlew assembleRelease   # app/build/outputs/apk/release/app-release.apk
+```
+> デバッグ版は `io.github.drawerdev.kurakagi.debug` として、リリース版と並べて入ります（リリース版と、その中のアカウントを上書きしません）。
+>
+> 署名鍵とパスワードはリポジトリに置きません。リリース版の署名には、`~/.gradle/gradle.properties`（または同じ名前の環境変数）に次の 4 つを書きます。
+>
+> ```properties
+> KURAKAGI_KEYSTORE=C:/Users/<user>/keys/kurakagi.keystore
+> KURAKAGI_KEYSTORE_PASSWORD=...
+> KURAKAGI_KEY_ALIAS=...
+> KURAKAGI_KEY_PASSWORD=...
+> ```
+>
+> どれかが無いと、`assembleRelease` は署名していない `app-release-unsigned.apk` を作ります（デバッグ用の鍵では署名しません）。署名は v1 (JAR) + v2 + v3 です。
 
 ---
 
 ## 📜 ライセンス
-Apache License 2.0（[LICENSE](LICENSE)）。Copyright 2026 drawerdev。
+GNU General Public License v3.0 or later（`GPL-3.0-or-later`、[LICENSE](LICENSE)）。Copyright (C) 2026 drawerdev。
 
 使っている第三者のもの（詳しくは [NOTICE](NOTICE)）:
-* **ZXing Core 2.3.0**（`app/libs/core-2.3.0.jar`）: QR の読み書き。Apache License 2.0
+* **ZXing Core 2.3.0**（Maven Central の `com.google.zxing:core:2.3.0`）: QR の読み書き。Apache License 2.0
+* **Gradle Wrapper**（`gradlew`・`gradle/wrapper/`）: ビルドにだけ使い、アプリには入りません。Apache License 2.0
 * `app/src/test/java/org/json/`: テストを PC で動かすための最小限の代用品で、アプリには入りません。エラーの文言の一部が JSON-java（Public Domain）と同じです
