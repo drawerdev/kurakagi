@@ -428,21 +428,30 @@ public class CoreTestRunner {
             assertTrue("QR matrix width > 0", qr.getWidth() > 0);
             assertTrue("QR matrix is square", qr.getWidth() == qr.getHeight());
 
-            // Quiet zone is 4 modules on all sides
-            int qz = 4;
-            // Finder top-left (qz, qz) should be black
-            assertTrue("Top-left finder top-left module", qr.get(qz, qz));
-            assertTrue("Top-left finder center module", qr.get(qz + 3, qz + 3));
+            // QrEncoder returns the matrix WITHOUT a quiet zone (ZXing MARGIN=0);
+            // the quiet zone is added at render time by QrMatrix.toPixelArray.
+            int codeSize = qr.getWidth();
 
-            int codeSize = qr.getWidth() - 2 * qz;
-            // Finder top-right (qz + codeSize - 7, qz)
-            assertTrue("Top-right finder top-left module", qr.get(qz + codeSize - 7, qz));
-            // Finder bottom-left (qz, qz + codeSize - 7)
-            assertTrue("Bottom-left finder top-left module", qr.get(qz, qz + codeSize - 7));
+            // Each 7x7 finder pattern: black outer ring, white inner ring, black 3x3 core
+            assertTrue("Top-left finder pattern (7x7)", isFinderPattern(qr, 0, 0));
+            assertTrue("Top-right finder pattern (7x7)", isFinderPattern(qr, codeSize - 7, 0));
+            assertTrue("Bottom-left finder pattern (7x7)", isFinderPattern(qr, 0, codeSize - 7));
 
             // Test pixel rendering
             int[] pixels = qr.toPixelArray(2, 2, 0xFF000000, 0xFFFFFFFF);
             assertTrue("Pixel array length matches dimensions", pixels.length == (qr.getWidth() + 4) * 2 * (qr.getHeight() + 4) * 2);
+
+            // Round trip: render with a 4-module quiet zone, decode with ZXing, compare text
+            int scale = 4;
+            int margin = 4;
+            int imgW = (qr.getWidth() + 2 * margin) * scale;
+            int imgH = (qr.getHeight() + 2 * margin) * scale;
+            int[] img = qr.toPixelArray(scale, margin, 0xFF000000, 0xFFFFFFFF);
+            com.google.zxing.LuminanceSource source = new com.google.zxing.RGBLuminanceSource(imgW, imgH, img);
+            com.google.zxing.BinaryBitmap bitmap = new com.google.zxing.BinaryBitmap(
+                    new com.google.zxing.common.HybridBinarizer(source));
+            com.google.zxing.Result decoded = new com.google.zxing.qrcode.QRCodeReader().decode(bitmap);
+            assertEquals("ZXing round-trip decodes original URI", content, decoded.getText());
 
             System.out.println("Generated QR Code for OTP URI (Version auto-detected): " + codeSize + "x" + codeSize);
         } catch (Exception e) {
@@ -450,6 +459,20 @@ public class CoreTestRunner {
             System.err.println("[FAIL] QrEncoder exception: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    /** True if the 7x7 block at (left, top) is a QR finder pattern. */
+    private static boolean isFinderPattern(QrMatrix qr, int left, int top) {
+        for (int dy = 0; dy < 7; dy++) {
+            for (int dx = 0; dx < 7; dx++) {
+                boolean outerRing = dx == 0 || dx == 6 || dy == 0 || dy == 6;
+                boolean core = dx >= 2 && dx <= 4 && dy >= 2 && dy <= 4;
+                if (qr.get(left + dx, top + dy) != (outerRing || core)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private static void testQrYuvDecoder() {

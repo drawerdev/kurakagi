@@ -89,7 +89,7 @@ Kurakagi/
 │   │   │       ├── layout/         # 画面レイアウト XML
 │   │   │       └── values/         # strings, colors, styles
 │   │   └── test/java/io/github/drawerdev/kurakagi/
-│   │       └── CoreTestRunner.java # 純粋Java単体テスト実行クラス (91件全PASS)
+│   │       └── CoreTestRunner.java # 純粋Java単体テスト実行クラス (107件全PASS)
 ├── build_apk.ps1                   # 完全自動ビルドスクリプト
 └── dist/
     └── Kurakagi-release.apk       # 完成署名済みリリース APK
@@ -104,7 +104,7 @@ Kurakagi/
 javac -encoding UTF-8 -cp app/libs/core-2.3.0.jar -d build_test @sources_core.txt
 java -cp "build_test;app/libs/core-2.3.0.jar" io.github.drawerdev.kurakagi.CoreTestRunner
 ```
-> 107 件（RFC 4226/6238、Base32、バックアップ形式 v2 の改ざん検出、PBKDF2-HMAC-SHA256 の RFC 7914 の値、QR、SNTP など）。**QR の位置検出パターンの 3 件は失敗する**（1.0.0 から。未修正）。
+> 107 件（RFC 4226/6238、Base32、バックアップ形式 v2 の改ざん検出、PBKDF2-HMAC-SHA256 の RFC 7914 の値、QR、SNTP など）。全件 PASS。
 
 ### APK パッケージのビルド
 ```powershell
