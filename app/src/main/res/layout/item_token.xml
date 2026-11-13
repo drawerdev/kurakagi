@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_token_root"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_card"
+    android:padding="14dp">
+
+    <!-- アカウントヘッダー行 -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="6dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_item_issuer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/accent_blue"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_item_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:ellipsize="end" />
+        </LinearLayout>
+
+        <!-- 詳細・バックアップボタン -->
+        <Button
+            android:id="@+id/btn_item_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="30dp"
+            android:text="@string/btn_item_detail"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:gravity="center"
+            android:background="@drawable/bg_btn_compact" />
+    </LinearLayout>
+
+    <!-- メインコード表示（タップでコピー可能エリア） -->
+    <LinearLayout
+        android:id="@+id/layout_main_code"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:id="@+id/tv_item_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=""
+            android:textColor="@color/accent_cyan"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:letterSpacing="0.1" />
+
+        <TextView
+            android:id="@+id/tv_tap_to_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tap_to_copy"
+            android:textColor="@color/text_muted"
+            android:textSize="11sp"
+            android:layout_marginLeft="8dp" />
+    </LinearLayout>
+
+    <!-- アコーディオン展開トグルバー -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="6dp">
+
+        <TextView
+            android:id="@+id/tv_item_remaining"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=""
+            android:textColor="@color/text_muted"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/btn_toggle_triplet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="30dp"
+            android:text="@string/btn_triplet_expand"
+            android:textColor="@color/accent_cyan"
+            android:textSize="11sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:gravity="center"
+            android:background="@drawable/bg_btn_compact" />
+    </LinearLayout>
+
+    <!-- 3連コード展開エリア（デフォルトはGONE） -->
+    <LinearLayout
+        android:id="@+id/layout_triplet_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:visibility="gone">
+
+        <!-- ディバイダー -->
+        <View
+            android:id="@+id/view_triplet_divider"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tv_triplet_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/triplet_hint"
+            android:textColor="@color/accent_amber"
+            android:textSize="10sp"
+            android:layout_marginBottom="6dp" />
+
+        <!-- 3スロット横並び -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- T-1 スロット -->
+            <LinearLayout
+                android:id="@+id/slot_prev"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_slot_box"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginRight="4dp">
+
+                <TextView
+                    android:id="@+id/tv_slot_prev_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/slot_prev_label"
+                    android:textColor="@color/text_muted"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_slot_prev_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+            </LinearLayout>
+
+            <!-- T (現在) スロット -->
+            <LinearLayout
+                android:id="@+id/slot_curr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_slot_box_active"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/tv_slot_curr_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/slot_curr_label"
+                    android:textColor="@color/accent_cyan"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_slot_curr_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/accent_cyan"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+            </LinearLayout>
+
+            <!-- T+1 スロット -->
+            <LinearLayout
+                android:id="@+id/slot_next"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_slot_box"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginLeft="4dp">
+
+                <TextView
+                    android:id="@+id/tv_slot_next_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/slot_next_label"
+                    android:textColor="@color/text_muted"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_slot_next_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

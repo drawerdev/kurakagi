@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- API 11-13 Holo themes for cleaner native Dark/Light AlertDialogs and widgets -->
+    <style name="Theme.Kurakagi.Dark" parent="@android:style/Theme.Holo.NoActionBar">
+        <item name="android:windowBackground">@color/dark_bg</item>
+        <item name="android:textColor">@color/dark_text_primary</item>
+    </style>
+
+    <style name="Theme.Kurakagi.Dark.Fullscreen" parent="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@color/dark_bg</item>
+        <item name="android:textColor">@color/dark_text_primary</item>
+    </style>
+
+    <style name="Theme.Kurakagi.Light" parent="@android:style/Theme.Holo.Light.NoActionBar">
+        <item name="android:windowBackground">@color/light_bg</item>
+        <item name="android:textColor">@color/light_text_primary</item>
+    </style>
+
+    <style name="Theme.Kurakagi.Light.Fullscreen" parent="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@color/light_bg</item>
+        <item name="android:textColor">@color/light_text_primary</item>
+    </style>
+</resources>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kurakagi</string>
+    <string name="title_scan_qr">Scan QR Code</string>
+    <string name="title_manual_add">Add Account Manually</string>
+    <string name="title_token_detail">Token Details &amp; Backup</string>
+    <string name="title_settings">Settings &amp; Time Sync</string>
+
+    <!-- Common -->
+    <string name="btn_back">← Back</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_dialog_back">Back</string>
+    <string name="default_issuer_label">2FA Token</string>
+    <string name="code_error">ERROR</string>
+
+    <!-- Main Screen -->
+    <string name="empty_accounts_title">No accounts yet</string>
+    <string name="empty_accounts_desc">Scan a QR code or enter a secret key\nmanually using the buttons below.</string>
+    <string name="btn_scan_qr">Scan QR</string>
+    <string name="btn_manual_add">Manual Entry</string>
+    <string name="btn_quick_ntp">NTP</string>
+    <string name="btn_settings">Settings</string>
+    <string name="btn_time_sync">NTP Time Sync</string>
+    <string name="time_offset_label">Time Offset:</string>
+    <string name="time_offset_status_ok">Exact (±0s)</string>
+    <string name="header_offset_ok">Offset: ±0s (Exact)</string>
+    <string name="header_offset_format">Offset: %1$s%2$ds</string>
+    <string name="countdown_label">Next refresh</string>
+    <string name="countdown_seconds_format">%ds</string>
+    <string name="time_remaining_format">%ds left</string>
+    <string name="btn_triplet_toggle">3-Slot Codes</string>
+    <string name="btn_triplet_expand">▼ 3-Slot</string>
+    <string name="btn_triplet_collapse">▲ Hide</string>
+    <string name="btn_item_detail">Details</string>
+    <string name="tap_to_copy">Tap to copy</string>
+    <string name="triplet_hint">* Clock-skew recovery slots (tap any code to copy)</string>
+    <string name="slot_prev_label">Prev (-30s)</string>
+    <string name="slot_curr_label">Now (0s)</string>
+    <string name="slot_next_label">Next (+30s)</string>
+    <string name="slot_prev_suffix">%s (Prev slot)</string>
+    <string name="slot_next_suffix">%s (Next slot)</string>
+    <string name="copied_to_clipboard">Copied code: %s</string>
+    <string name="toast_code_copied_format">Copied code for %1$s: %2$s</string>
+    <string name="toast_ntp_connecting">Connecting to NTP server (pool.ntp.org)...</string>
+    <string name="toast_ntp_success_format">Time offset updated: %1$s%2$ds</string>
+    <string name="toast_ntp_failed_format">NTP sync failed: %s\n(Offline or no Wi-Fi connection)</string>
+    <string name="toast_camera_permission_required">Camera permission is required to scan QR codes</string>
+
+    <!-- Scan Screen -->
+    <string name="scan_header_title">Scan QR Code</string>
+    <string name="scan_hint">Align the QR code inside the frame</string>
+    <string name="scan_success">QR Code Scanned</string>
+    <string name="scan_error_invalid">Invalid TOTP QR code</string>
+    <string name="scan_switch_manual">Enter Key Manually</string>
+    <string name="error_camera_open">Could not open camera device.</string>
+    <string name="error_camera_start_format">Failed to start camera: %s</string>
+    <string name="toast_unsupported_qr_format">Unsupported QR code:\n%s</string>
+    <string name="scan_confirm_account_format">Account: %s</string>
+    <string name="scan_confirm_issuer_format">\nIssuer: %s</string>
+    <string name="scan_confirm_question">\n\nAdd this account?</string>
+    <string name="btn_register_account">Add</string>
+    <string name="toast_account_registered_format">Added \"%s\"</string>
+    <string name="dialog_camera_error_title">Camera Error</string>
+    <string name="dialog_camera_error_switch_format">%s\n\nSwitch to manual entry?</string>
+    <string name="btn_go_manual">Manual Entry</string>
+
+    <!-- Manual Add Screen -->
+    <string name="label_account_name">Account / Service Name</string>
+    <string name="hint_account_name">e.g., Google (user@gmail.com)</string>
+    <string name="label_issuer">Issuer (Optional)</string>
+    <string name="hint_issuer">e.g., Google, GitHub, AWS</string>
+    <string name="label_secret">Secret Key (Base32)</string>
+    <string name="hint_secret">e.g., JBSWY3DPEHPK3PXP</string>
+    <string name="hint_secret_format_note">* Alphanumeric (A-Z, 2-7). Spaces are removed automatically.</string>
+    <string name="btn_advanced_show">Advanced Options (Optional) ▼</string>
+    <string name="btn_advanced_hide">Advanced Options ▲</string>
+    <string name="label_digits">Code Digits:</string>
+    <string name="option_digits_6">6 digits (Default)</string>
+    <string name="option_digits_8">8 digits</string>
+    <string name="label_period">Refresh Period (sec):</string>
+    <string name="option_period_30">30s (Default)</string>
+    <string name="option_period_60">60s</string>
+    <string name="label_algorithm">Hash Algorithm:</string>
+    <string name="btn_save_account">Save Account</string>
+    <string name="error_empty_account_name">Please enter an account name</string>
+    <string name="error_empty_secret">Please enter a secret key</string>
+    <string name="error_invalid_secret">Invalid secret key (Base32: A-Z, 2-7)</string>
+    <string name="toast_account_added_format">Added \"%s\"</string>
+
+    <!-- Token Detail Screen -->
+    <string name="detail_specs_format">Spec: %1$d digits / %2$ds period / %3$s</string>
+    <string name="detail_secret_label">Base32 Secret (For Offline Paper Backup):</string>
+    <string name="btn_copy_secret">Copy Secret Key</string>
+    <string name="detail_secret_note">Write this on paper and keep it safe. Old phones can die without warning. The digits 0, 1, 8 and 9 are never used: a round letter is O, a straight one is I. You can type it back with the spaces. Also keep the recovery codes each service gives you when you turn on two-step login.</string>
+    <string name="detail_qr_label">Backup QR Code:</string>
+    <string name="detail_qr_hint">Scan this QR code with another authenticator app to clone or back up this key.</string>
+    <string name="btn_delete_account">Delete This Account</string>
+    <string name="confirm_delete_title">Delete Account</string>
+    <string name="confirm_delete_msg">Delete this account? Make sure you have saved a backup of the secret key first.</string>
+    <string name="btn_confirm_delete">Delete</string>
+    <string name="toast_account_not_found">Account not found</string>
+    <string name="toast_secret_copied">Secret key copied to clipboard</string>
+    <string name="toast_qr_error_format">QR code generation error: %s</string>
+    <string name="toast_account_deleted">Account deleted</string>
+
+    <!-- Settings Screen: Time Sync -->
+    <string name="settings_time_title">Offline Clock Calibration</string>
+    <string name="settings_time_desc">Fine-tune the in-app time offset in seconds if your device clock is skewed.</string>
+    <string name="settings_current_offset_label">Current Time Offset:</string>
+    <string name="settings_offset_exact">±0s (Exact)</string>
+    <string name="settings_offset_format">%1$s%2$ds</string>
+    <string name="btn_offset_minus_10">-10s</string>
+    <string name="btn_offset_minus_1">-1s</string>
+    <string name="btn_offset_plus_1">+1s</string>
+    <string name="btn_offset_plus_10">+10s</string>
+    <string name="btn_offset_reset">Reset Offset</string>
+    <string name="btn_settings_ntp">Sync with NTP (pool.ntp.org)</string>
+    <string name="settings_ntp_hint">* Tap while connected to Wi-Fi/network to sync accurate time automatically.</string>
+    <string name="toast_offset_reset">Time offset reset (±0s)</string>
+    <string name="ntp_status_connecting">Connecting to NTP server (pool.ntp.org)...</string>
+    <string name="ntp_status_success_format">Synced: offset adjusted by %1$s%2$ds</string>
+    <string name="ntp_status_error_format">Sync failed: %s (Use manual steppers when offline)</string>
+
+    <!-- Settings Screen: Backup & Restore -->
+    <string name="settings_backup_title">Encrypted Backup &amp; Restore</string>
+    <string name="settings_backup_desc">Save all accounts to one file, encrypted with a password you choose. Android 4.4 and later: pick where to save it. Older Android: saved in the Kurakagi folder on the SD card.</string>
+    <string name="btn_export_sd">Back Up (Encrypted)</string>
+    <string name="btn_import_sd">Restore from Backup</string>
+    <string name="toast_export_success_format">Encrypted backup saved:\n%s</string>
+    <string name="toast_export_saved">Encrypted backup saved</string>
+    <string name="toast_export_failed">Could not save the backup (check the storage)</string>
+    <string name="toast_error_format">Error: %s</string>
+    <string name="toast_backup_dir_missing">Backup folder not found</string>
+    <string name="toast_no_backup_files">No backup files found</string>
+    <string name="toast_no_file_picker">This device has no file picker</string>
+    <string name="dialog_backup_password_title">Backup password</string>
+    <string name="dialog_backup_password_msg">The file is encrypted with this password. Without it, nobody can restore the file, including you. Use at least 8 characters and write it down somewhere safe.</string>
+    <string name="hint_backup_password">Password</string>
+    <string name="hint_backup_password_confirm">Password again</string>
+    <string name="btn_backup_create">Encrypt &amp; Save</string>
+    <string name="toast_password_too_short">Use at least 8 characters</string>
+    <string name="toast_password_mismatch">The two passwords do not match</string>
+    <string name="progress_encrypting">Encrypting… (a few seconds on old phones)</string>
+    <string name="progress_decrypting">Decrypting… (a few seconds on old phones)</string>
+    <string name="dialog_restore_password_title">Password for this backup</string>
+    <string name="btn_restore">Restore</string>
+    <string name="toast_wrong_password">Wrong password, or the file is damaged</string>
+    <string name="dialog_plain_backup_title">Unencrypted backup</string>
+    <string name="dialog_plain_backup_msg">This file was made by an early test version and is NOT encrypted. Anyone who gets the file can copy your accounts. Delete it now, and make a new encrypted backup.</string>
+    <string name="dialog_import_title">Select Backup to Restore</string>
+    <string name="toast_import_success_format">Restored %d account(s)</string>
+    <string name="toast_import_error_format">Restore error: %s</string>
+    <string name="toast_storage_permission_granted">Storage permission granted</string>
+    <string name="toast_storage_permission_required">Storage permission is required to access the SD card</string>
+
+    <!-- Settings Screen: Theme -->
+    <string name="settings_theme_title">Appearance &amp; Theme</string>
+    <string name="settings_theme_desc">Choose a high-contrast vault theme suited for low-light or bright environments.</string>
+    <string name="theme_dark_label">Calm Vault (Dark)</string>
+    <string name="theme_light_label">Clean Ledger (Light)</string>
+    <string name="toast_theme_changed_dark">Theme switched to Calm Vault (Dark)</string>
+    <string name="toast_theme_changed_light">Theme switched to Clean Ledger (Light)</string>
+
+    <!-- Settings Screen: Language -->
+    <string name="settings_language_title">Display Language</string>
+    <string name="settings_language_desc">Override the app language or follow your device system setting.</string>
+    <string name="lang_auto">System Default</string>
+    <string name="lang_en">English</string>
+    <string name="lang_ja">日本語</string>
+
+    <!-- Settings Screen: About & Trust -->
+    <string name="settings_about_title">About &amp; Security Transparency</string>
+    <string name="about_version_format">Version %s</string>
+    <string name="about_app_name_version_format">%1$s v%2$s</string>
+    <string name="about_developer_label">Developer</string>
+    <string name="about_developer_name">drawerdev</string>
+    <string name="about_github_label">GitHub</string>
+    <string name="about_github_url">https://github.com/drawerdev</string>
+    <string name="about_security_heading">How Kurakagi Handles Your Data</string>
+    <string name="about_trust_offline">• Offline OTP Generation: All TOTP/HOTP codes are calculated locally on your device without an internet connection.</string>
+    <string name="about_trust_no_ads">• No Ads or Analytics: Contains no advertisements, trackers, or third-party analytics SDKs.</string>
+    <string name="about_trust_network">• Minimal Network Use: Network access is used solely for NTP clock sync (pool.ntp.org) when you manually initiate it. Your keys never leave the device.</string>
+    <string name="about_trust_storage">• Storage: Keys are kept in this app\'s private storage, NOT encrypted (old Android has no hardware key store). Other apps cannot read it, but a rooted or unlocked phone can. Cloud auto-backup is off. Backups are always encrypted with your password.</string>
+    <string name="about_github_open_error">Could not open browser</string>
+    <string name="about_github_copied">Copied GitHub URL to clipboard</string>
+</resources>

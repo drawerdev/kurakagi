@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000">
+
+    <!-- カメラプレビュー (画面全体) -->
+    <SurfaceView
+        android:id="@+id/sv_camera_preview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <!-- 照準オーバーレイビュー（中央エリアにHUDを描画） -->
+    <io.github.drawerdev.kurakagi.ui.ViewFinderView
+        android:id="@+id/v_finder"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <!-- 上部ヘッダー（タイトル＆ヒント案内） -->
+    <LinearLayout
+        android:id="@+id/layout_scan_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/scan_overlay_bg"
+        android:paddingTop="20dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/tv_scan_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_header_title"
+            android:textColor="@color/dark_accent_primary"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tv_scan_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_hint"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="12sp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- 下部コントロールパネル（被りを完全に排除した押しやすい独立配置） -->
+    <LinearLayout
+        android:id="@+id/layout_scan_footer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/scan_overlay_bg"
+        android:paddingTop="14dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <Button
+            android:id="@+id/btn_scan_switch_manual"
+            android:layout_width="fill_parent"
+            android:layout_height="46dp"
+            android:text="@string/scan_switch_manual"
+            android:textColor="@color/text_inverse"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:background="@drawable/bg_btn_accent"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/btn_scan_cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="44dp"
+            android:text="@string/btn_cancel"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp"
+            android:background="@drawable/bg_btn_secondary" />
+    </LinearLayout>
+
+</RelativeLayout>

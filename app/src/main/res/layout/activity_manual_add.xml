@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_manual_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark">
+
+    <!-- トップヘッダー -->
+    <LinearLayout
+        android:id="@+id/layout_manual_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="@color/bg_surface">
+
+        <Button
+            android:id="@+id/btn_manual_back"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="@string/btn_back"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:background="@drawable/bg_btn_secondary"
+            android:layout_marginRight="12dp" />
+
+        <TextView
+            android:id="@+id/tv_manual_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_manual_add"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_manual_header_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- フォームカード -->
+            <LinearLayout
+                android:id="@+id/layout_manual_form_card"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <!-- アカウント名 -->
+                <TextView
+                    android:id="@+id/tv_label_account_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_account_name"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <EditText
+                    android:id="@+id/et_account_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_account_name"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_muted"
+                    android:background="@drawable/bg_edit_text"
+                    android:singleLine="true"
+                    android:layout_marginBottom="14dp" />
+
+                <!-- 発行元 -->
+                <TextView
+                    android:id="@+id/tv_label_issuer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_issuer"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <EditText
+                    android:id="@+id/et_issuer"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_issuer"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_muted"
+                    android:background="@drawable/bg_edit_text"
+                    android:singleLine="true"
+                    android:layout_marginBottom="14dp" />
+
+                <!-- シークレットキー -->
+                <TextView
+                    android:id="@+id/tv_label_secret"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_secret"
+                    android:textColor="@color/accent_cyan"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <EditText
+                    android:id="@+id/et_secret"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_secret"
+                    android:textColor="@color/accent_cyan"
+                    android:textColorHint="@color/text_muted"
+                    android:typeface="monospace"
+                    android:background="@drawable/bg_edit_text"
+                    android:singleLine="true"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_secret_format_note"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_secret_format_note"
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <!-- 詳細設定（展開トグル） -->
+            <LinearLayout
+                android:id="@+id/layout_manual_advanced_card"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="20dp">
+
+                <Button
+                    android:id="@+id/btn_toggle_advanced"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36dp"
+                    android:text="@string/btn_advanced_show"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:background="@drawable/bg_btn_secondary" />
+
+                <LinearLayout
+                    android:id="@+id/layout_advanced_options"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone">
+
+                    <!-- 桁数 -->
+                    <TextView
+                        android:id="@+id/tv_label_digits"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_digits"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_digits"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_digits_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/option_digits_6"
+                            android:textColor="@color/text_primary"
+                            android:checked="true"
+                            android:layout_marginRight="16dp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_digits_8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/option_digits_8"
+                            android:textColor="@color/text_primary" />
+                    </RadioGroup>
+
+                    <!-- 更新周期 -->
+                    <TextView
+                        android:id="@+id/tv_label_period"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_period"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_period"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_period_30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/option_period_30"
+                            android:textColor="@color/text_primary"
+                            android:checked="true"
+                            android:layout_marginRight="16dp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_period_60"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/option_period_60"
+                            android:textColor="@color/text_primary" />
+                    </RadioGroup>
+
+                    <!-- アルゴリズム -->
+                    <TextView
+                        android:id="@+id/tv_label_algorithm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_algorithm"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_algo"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_algo_sha1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SHA1"
+                            android:textColor="@color/text_primary"
+                            android:checked="true"
+                            android:layout_marginRight="12dp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_algo_sha256"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SHA256"
+                            android:textColor="@color/text_primary"
+                            android:layout_marginRight="12dp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_algo_sha512"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SHA512"
+                            android:textColor="@color/text_primary" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 保存ボタン -->
+            <Button
+                android:id="@+id/btn_save_account"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:text="@string/btn_save_account"
+                android:textColor="@color/text_inverse"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_btn_accent" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

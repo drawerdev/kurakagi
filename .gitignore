@@ -1,0 +1,15 @@
+# 署名鍵は絶対に入れない
+*.keystore
+*.jks
+*.idsig
+
+# ビルドの出力
+build/
+build_test/
+dist/
+*.class
+*.apk
+
+# 試作のときの残り（使っていない）。ZXing は app/libs/ のものだけを使う
+/core-*.jar
+/ZxingTest.java

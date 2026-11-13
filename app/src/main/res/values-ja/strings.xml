@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kurakagi</string>
+    <string name="title_scan_qr">QRコード読み取り</string>
+    <string name="title_manual_add">アカウント手動追加</string>
+    <string name="title_token_detail">トークン詳細・再バックアップ</string>
+    <string name="title_settings">設定 &amp; 時刻補正</string>
+
+    <!-- 共通 -->
+    <string name="btn_back">← 戻る</string>
+    <string name="btn_cancel">キャンセル</string>
+    <string name="btn_dialog_back">戻る</string>
+    <string name="default_issuer_label">2FA トークン</string>
+    <string name="code_error">ERROR</string>
+
+    <!-- メイン画面 -->
+    <string name="empty_accounts_title">登録アカウントがありません</string>
+    <string name="empty_accounts_desc">下のボタンからQRコードをスキャンするか、\nシークレットを手動で入力して登録してください。</string>
+    <string name="btn_scan_qr">QRスキャン追加</string>
+    <string name="btn_manual_add">手動で追加</string>
+    <string name="btn_quick_ntp">NTP</string>
+    <string name="btn_settings">設定</string>
+    <string name="btn_time_sync">NTP時刻同期</string>
+    <string name="time_offset_label">時刻オフセット:</string>
+    <string name="time_offset_status_ok">正確 (±0s)</string>
+    <string name="header_offset_ok">補正: ±0s (正確)</string>
+    <string name="header_offset_format">補正: %1$s%2$d秒</string>
+    <string name="countdown_label">次の更新まで</string>
+    <string name="countdown_seconds_format">%d秒</string>
+    <string name="time_remaining_format">残り %d 秒</string>
+    <string name="btn_triplet_toggle">3連コード表示</string>
+    <string name="btn_triplet_expand">▼ 3連コード</string>
+    <string name="btn_triplet_collapse">▲ 折りたたむ</string>
+    <string name="btn_item_detail">詳細/鍵</string>
+    <string name="tap_to_copy">タップでコピー</string>
+    <string name="triplet_hint">※端末時刻ズレ救済スロット（タップして各コードをコピー可能）</string>
+    <string name="slot_prev_label">前 (-30s)</string>
+    <string name="slot_curr_label">今 ( 0s)</string>
+    <string name="slot_next_label">次 (+30s)</string>
+    <string name="slot_prev_suffix">%s (前スロット)</string>
+    <string name="slot_next_suffix">%s (次スロット)</string>
+    <string name="copied_to_clipboard">コードをコピーしました: %s</string>
+    <string name="toast_code_copied_format">%1$s のコード [%2$s] をコピーしました</string>
+    <string name="toast_ntp_connecting">NTPサーバー (pool.ntp.org) に接続中...</string>
+    <string name="toast_ntp_success_format">時刻補正完了: %1$s%2$d 秒</string>
+    <string name="toast_ntp_failed_format">NTP同期失敗: %s\n(オフラインまたはWi-Fi未接続)</string>
+    <string name="toast_camera_permission_required">QRコードスキャンにはカメラの許可が必要です</string>
+
+    <!-- スキャン画面 -->
+    <string name="scan_header_title">QRコードをスキャン</string>
+    <string name="scan_hint">照準枠の中にQRコードを合わせてください</string>
+    <string name="scan_success">読み取り成功</string>
+    <string name="scan_error_invalid">無効なTOTP QRコードです</string>
+    <string name="scan_switch_manual">手動入力に切り替え</string>
+    <string name="error_camera_open">カメラデバイスを開けませんでした。</string>
+    <string name="error_camera_start_format">カメラの起動に失敗しました: %s</string>
+    <string name="toast_unsupported_qr_format">未対応のQRコードです:\n%s</string>
+    <string name="scan_confirm_account_format">アカウント名: %s</string>
+    <string name="scan_confirm_issuer_format">\n発行元: %s</string>
+    <string name="scan_confirm_question">\n\nこのアカウントを登録しますか？</string>
+    <string name="btn_register_account">登録する</string>
+    <string name="toast_account_registered_format">「%s」を登録しました</string>
+    <string name="dialog_camera_error_title">カメラ起動エラー</string>
+    <string name="dialog_camera_error_switch_format">%s\n\n手動登録画面へ切り替えますか？</string>
+    <string name="btn_go_manual">手動登録へ</string>
+
+    <!-- 手動追加画面 -->
+    <string name="label_account_name">アカウント名 / サービス名</string>
+    <string name="hint_account_name">例: Google (user@gmail.com)</string>
+    <string name="label_issuer">発行元 (任意)</string>
+    <string name="hint_issuer">例: Google, GitHub, AWS</string>
+    <string name="label_secret">シークレットキー (Base32)</string>
+    <string name="hint_secret">例: JBSWY3DPEHPK3PXP</string>
+    <string name="hint_secret_format_note">※英数字（A-Z, 2-7）。空白は自動で除去されます。</string>
+    <string name="btn_advanced_show">詳細設定 (通常は変更不要) ▼</string>
+    <string name="btn_advanced_hide">詳細設定 ▲</string>
+    <string name="label_digits">コード桁数:</string>
+    <string name="option_digits_6">6桁 (標準)</string>
+    <string name="option_digits_8">8桁</string>
+    <string name="label_period">更新周期 (秒):</string>
+    <string name="option_period_30">30秒 (標準)</string>
+    <string name="option_period_60">60秒</string>
+    <string name="label_algorithm">ハッシュアルゴリズム:</string>
+    <string name="btn_save_account">アカウントを保存</string>
+    <string name="error_empty_account_name">アカウント名を入力してください</string>
+    <string name="error_empty_secret">シークレットキーを入力してください</string>
+    <string name="error_invalid_secret">シークレットキーが正しくありません (Base32英数字 A-Z, 2-7)</string>
+    <string name="toast_account_added_format">「%s」を追加しました</string>
+
+    <!-- トークン詳細画面 -->
+    <string name="detail_specs_format">仕様: %1$d桁 / %2$d秒更新 / %3$s</string>
+    <string name="detail_secret_label">Base32 シークレット（紙の控え用）:</string>
+    <string name="btn_copy_secret">シークレットをコピー</string>
+    <string name="detail_secret_note">紙に書き写して、安全な場所に保管してください。古い端末は突然壊れることがあります。数字の 0・1・8・9 は使われません（丸い字は O、縦棒は I です）。区切りの空白は入れたまま入力し直せます。2 段階認証を設定したときに各サービスが出す「リカバリーコード」も、一緒に保管してください。</string>
+    <string name="detail_qr_label">再クローン用 QRコード:</string>
+    <string name="detail_qr_hint">他のスマホの認証アプリでこのQRをスキャンすると、鍵を複製・バックアップできます。</string>
+    <string name="btn_delete_account">このアカウントを削除</string>
+    <string name="confirm_delete_title">アカウント削除</string>
+    <string name="confirm_delete_msg">このアカウントを削除してもよろしいですか？事前にシークレットの控えを保管してください。</string>
+    <string name="btn_confirm_delete">削除する</string>
+    <string name="toast_account_not_found">アカウントが見つかりませんでした</string>
+    <string name="toast_secret_copied">シークレットキーをクリップボードにコピーしました</string>
+    <string name="toast_qr_error_format">QRコード生成エラー: %s</string>
+    <string name="toast_account_deleted">アカウントを削除しました</string>
+
+    <!-- 設定画面: 時刻補正 -->
+    <string name="settings_time_title">オフライン端末の時刻補正</string>
+    <string name="settings_time_desc">システム時計がズレている場合、アプリ内オフセットで秒単位の微調整が可能です。</string>
+    <string name="settings_current_offset_label">現在の適用オフセット:</string>
+    <string name="settings_offset_exact">±0 秒 (正確)</string>
+    <string name="settings_offset_format">%1$s%2$d 秒</string>
+    <string name="btn_offset_minus_10">-10秒</string>
+    <string name="btn_offset_minus_1">-1秒</string>
+    <string name="btn_offset_plus_1">+1秒</string>
+    <string name="btn_offset_plus_10">+10秒</string>
+    <string name="btn_offset_reset">オフセットをリセット</string>
+    <string name="btn_settings_ntp">NTP時刻同期 (pool.ntp.org)</string>
+    <string name="settings_ntp_hint">※Wi-Fi接続時にタップすると正確な時刻と自動同期します</string>
+    <string name="toast_offset_reset">オフセットをリセットしました (±0秒)</string>
+    <string name="ntp_status_connecting">NTP サーバー (pool.ntp.org) に接続中...</string>
+    <string name="ntp_status_success_format">同期成功: %1$s%2$d 秒のズレを自動補正しました</string>
+    <string name="ntp_status_error_format">同期失敗: %s (オフライン時は手動ステッパーをご利用ください)</string>
+
+    <!-- 設定画面: SDカードバックアップ & 復元 -->
+    <string name="settings_backup_title">暗号化バックアップと復元</string>
+    <string name="settings_backup_desc">全アカウントを 1 つのファイルに保存します。ファイルは、あなたが決めたパスワードで暗号化されます。Android 4.4 以降は保存先を選べます。それより古い Android では、SD カードの Kurakagi フォルダに保存します。</string>
+    <string name="btn_export_sd">バックアップ（暗号化）</string>
+    <string name="btn_import_sd">バックアップから復元</string>
+    <string name="toast_export_success_format">暗号化したバックアップを保存しました:\n%s</string>
+    <string name="toast_export_saved">暗号化したバックアップを保存しました</string>
+    <string name="toast_export_failed">バックアップを保存できませんでした（保存先を確認してください）</string>
+    <string name="toast_error_format">エラー: %s</string>
+    <string name="toast_backup_dir_missing">バックアップフォルダが見つかりません</string>
+    <string name="toast_no_backup_files">バックアップファイルがありません</string>
+    <string name="toast_no_file_picker">この端末にはファイルを選ぶ画面がありません</string>
+    <string name="dialog_backup_password_title">バックアップのパスワード</string>
+    <string name="dialog_backup_password_msg">ファイルはこのパスワードで暗号化されます。パスワードが無いと、あなた自身も含めて誰も復元できません。8 文字以上にして、安全な場所に書き留めてください。</string>
+    <string name="hint_backup_password">パスワード</string>
+    <string name="hint_backup_password_confirm">パスワード（もう一度）</string>
+    <string name="btn_backup_create">暗号化して保存</string>
+    <string name="toast_password_too_short">8 文字以上にしてください</string>
+    <string name="toast_password_mismatch">2 つのパスワードが一致しません</string>
+    <string name="progress_encrypting">暗号化しています…（古い端末では数秒かかります）</string>
+    <string name="progress_decrypting">復号しています…（古い端末では数秒かかります）</string>
+    <string name="dialog_restore_password_title">このバックアップのパスワード</string>
+    <string name="btn_restore">復元</string>
+    <string name="toast_wrong_password">パスワードが違うか、ファイルが壊れています</string>
+    <string name="dialog_plain_backup_title">暗号化されていないバックアップ</string>
+    <string name="dialog_plain_backup_msg">このファイルは初期の試作版で作られたもので、暗号化されていません。ファイルを手に入れた人は、誰でもアカウントを写せます。今すぐ削除して、暗号化したバックアップを作り直してください。</string>
+    <string name="dialog_import_title">復元するバックアップを選択</string>
+    <string name="toast_import_success_format">%d 件のアカウントを復元しました</string>
+    <string name="toast_import_error_format">復元エラー: %s</string>
+    <string name="toast_storage_permission_granted">ストレージ権限が許可されました</string>
+    <string name="toast_storage_permission_required">SDカードへのアクセスにはストレージ権限が必要です</string>
+
+    <!-- 設定画面: テーマ -->
+    <string name="settings_theme_title">テーマ設定</string>
+    <string name="settings_theme_desc">使用環境に合わせて、見やすいカラーテーマを選択できます。</string>
+    <string name="theme_dark_label">Calm Vault（ダーク）</string>
+    <string name="theme_light_label">Clean Ledger（ライト）</string>
+    <string name="toast_theme_changed_dark">テーマを Calm Vault（ダーク）に変更しました</string>
+    <string name="toast_theme_changed_light">テーマを Clean Ledger（ライト）に変更しました</string>
+
+    <!-- 設定画面: 言語 -->
+    <string name="settings_language_title">表示言語</string>
+    <string name="settings_language_desc">アプリの表示言語を切り替えたり、端末の言語設定に合わせることができます。</string>
+    <string name="lang_auto">端末の言語に従う</string>
+    <string name="lang_en">English</string>
+    <string name="lang_ja">日本語</string>
+
+    <!-- 設定画面: アプリ情報・セキュリティの透明性 -->
+    <string name="settings_about_title">アプリ情報・セキュリティの透明性</string>
+    <string name="about_version_format">バージョン %s</string>
+    <string name="about_app_name_version_format">%1$s v%2$s</string>
+    <string name="about_developer_label">開発者</string>
+    <string name="about_developer_name">drawerdev</string>
+    <string name="about_github_label">GitHub</string>
+    <string name="about_github_url">https://github.com/drawerdev</string>
+    <string name="about_security_heading">データの取り扱いとセキュリティ方針</string>
+    <string name="about_trust_offline">• 完全オフライン生成: TOTP/HOTP 認証コードはすべて端末内で計算され、インターネット接続は不要です。</string>
+    <string name="about_trust_no_ads">• 広告・解析なし: 広告、トラッキング、第三者のアクセス解析SDKは一切含まれていません。</string>
+    <string name="about_trust_network">• 最小限の通信: 通信機能はユーザーが手動でNTP時刻同期を実行した際の時刻取得 (pool.ntp.org) のみに使用され、秘密鍵が外部に送信されることはありません。</string>
+    <string name="about_trust_storage">• 保存: 鍵はこのアプリ専用の領域に保存します。暗号化はしていません（古い Android には鍵を守る仕組みが無いため）。ほかのアプリからは読めませんが、root 化した端末やロックを解除された端末からは読めます。クラウドへの自動バックアップは無効です。バックアップは必ずパスワードで暗号化します。</string>
+    <string name="about_github_open_error">ブラウザを開けませんでした</string>
+    <string name="about_github_copied">GitHub URLをクリップボードにコピーしました</string>
+</resources>

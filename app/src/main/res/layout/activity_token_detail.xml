@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_detail_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark">
+
+    <!-- トップヘッダー -->
+    <LinearLayout
+        android:id="@+id/layout_detail_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="@color/bg_surface">
+
+        <Button
+            android:id="@+id/btn_detail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="@string/btn_back"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:background="@drawable/bg_btn_secondary"
+            android:layout_marginRight="12dp" />
+
+        <TextView
+            android:id="@+id/tv_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_token_detail"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- アカウント概要カード -->
+            <LinearLayout
+                android:id="@+id/card_detail_summary"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="14dp">
+
+                <TextView
+                    android:id="@+id/tv_detail_issuer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/accent_blue"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_detail_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_detail_specs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- QRコード再生成カード（別スマホへのクローン用） -->
+            <LinearLayout
+                android:id="@+id/card_detail_qr"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="14dp">
+
+                <TextView
+                    android:id="@+id/tv_detail_qr_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detail_qr_label"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/tv_detail_qr_hint"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detail_qr_hint"
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- QR表示枠（白背景・パディング） -->
+                <LinearLayout
+                    android:id="@+id/layout_qr_box"
+                    android:layout_width="220dp"
+                    android:layout_height="220dp"
+                    android:gravity="center"
+                    android:background="@color/qr_white_bg"
+                    android:padding="10dp"
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:id="@+id/iv_detail_qr"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- シークレット平文カード（紙控え用） -->
+            <LinearLayout
+                android:id="@+id/card_detail_secret"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tv_detail_secret_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detail_secret_label"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_detail_secret"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/accent_cyan"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    android:background="@drawable/bg_edit_text"
+                    android:padding="10dp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_detail_secret_note"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detail_secret_note"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp" />
+
+                <Button
+                    android:id="@+id/btn_copy_secret"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:text="@string/btn_copy_secret"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:background="@drawable/bg_btn_secondary" />
+            </LinearLayout>
+
+            <!-- 危険ゾーン（削除） -->
+            <Button
+                android:id="@+id/btn_delete_account"
+                android:layout_width="fill_parent"
+                android:layout_height="44dp"
+                android:text="@string/btn_delete_account"
+                android:textColor="@color/text_inverse"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_btn_danger"
+                android:layout_marginBottom="24dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
