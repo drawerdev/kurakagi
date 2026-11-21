@@ -58,8 +58,9 @@ Old phones no longer get security updates. Kurakagi is meant to be used as a ded
 | Device | Android | Date |
 |---|---|---|
 | Vodafone VFD 200 | 5.1 | — (1.0.1 not yet checked) |
+| Sony Xperia acro HD | 4.0.4 | 2026-11-21 |
 
-Android 2.x–4.x has not been tested yet. Reports of whether it works are welcome.
+Android 2.x–3.x has not been tested yet. Reports of whether it works are welcome.
 
 ## Build
 
@@ -176,8 +177,9 @@ Android 2.x〜4.x では、PC や別のスマホで APK を保存してから、
 | 機種 | Android | 日付 |
 |---|---|---|
 | Vodafone VFD 200 | 5.1 | —（1.0.1 は確認待ち） |
+| Sony Xperia acro HD | 4.0.4 | 2026-11-21 |
 
-Android 2.x〜4.x は未確認です。動いた・動かなかった報告を歓迎します。
+Android 2.x〜3.x は未確認です。動いた・動かなかった報告を歓迎します。
 
 ## ビルド
 
