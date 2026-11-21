@@ -52,6 +52,9 @@ public class ScanActivity extends Activity implements SurfaceHolder.Callback, Ca
     private boolean isScanning = false;
     private boolean isProcessingFrame = false;
     private boolean isAutoFocusing = false;
+    // FOCUS_MODE_AUTO / MACRO のときだけ、こちらから定期的に autoFocus() を呼ぶ。
+    // 連続 AF の最中に autoFocus() を呼ぶとピントが固定され、機種によっては合わなくなる（K-02、Xperia Z5 Compact）。
+    private boolean needsFocusTrigger = false;
     private Handler mainHandler;
 
     // 不正QRコードの連続読み込み・トースト累積防止
@@ -308,13 +311,19 @@ public class ScanActivity extends Activity implements SurfaceHolder.Callback, Ca
             } catch (Exception ignore) {
             }
 
-            // オートフォーカス対応
+            // オートフォーカス: AUTO を選び 2 秒ごとに autoFocus() を呼ぶ（ZXing のアプリの既定と同じ）。
+            // AUTO が無い機種だけ連続 AF にし、そのときは autoFocus() を呼ばない。
+            needsFocusTrigger = false;
             try {
                 List<String> focusModes = params.getSupportedFocusModes();
-                if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
-                    params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-                } else if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
+                if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
                     params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+                    needsFocusTrigger = true;
+                } else if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_MACRO)) {
+                    params.setFocusMode(Camera.Parameters.FOCUS_MODE_MACRO);
+                    needsFocusTrigger = true;
+                } else if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+                    params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
                 }
             } catch (Exception ignore) {
             }
@@ -325,7 +334,9 @@ public class ScanActivity extends Activity implements SurfaceHolder.Callback, Ca
                 camera.startPreview();
                 isScanning = true;
                 requestNextFrame();
-                mainHandler.postDelayed(autoFocusRunnable, 1000);
+                if (needsFocusTrigger) {
+                    mainHandler.postDelayed(autoFocusRunnable, 1000);
+                }
             }
         } catch (Exception e) {
             showCameraErrorDialog(getString(R.string.error_camera_start_format, e.getMessage()));
