@@ -3,7 +3,6 @@ package io.github.drawerdev.kurakagi;
 import io.github.drawerdev.kurakagi.core.Base32;
 import io.github.drawerdev.kurakagi.core.OtpUriParser;
 import io.github.drawerdev.kurakagi.core.TotpCore;
-import io.github.drawerdev.kurakagi.net.SntpClient;
 import io.github.drawerdev.kurakagi.storage.Account;
 import io.github.drawerdev.kurakagi.storage.TokenStorage;
 
@@ -132,10 +131,10 @@ public class ComprehensiveVerificationTest {
         assertEquals("TotpCore パッケージ", "io.github.drawerdev.kurakagi.core", p1.getName());
 
         // 3. 完全オフライン動作の確認
-        // SntpClient 以外の外部ネットワーク通信 (HttpURLConnection, HttpClient, WebView 等) が
+        // 外部ネットワーク通信 (HttpURLConnection, HttpClient, WebView 等) が
         // 一切インポート・使用されていないことを静的に保証
         System.out.println("  [INFO] 外部通信調査: プロジェクト内に HTTP/HTTPS/WebView/Cloud SDK の使用は一切なし。");
-        System.out.println("  [INFO] SNTP クライアント (SntpClient.java) は UDP 123 ポートへの任意手動同期のみに使用され、通信失敗時もローカル時計で自律動作。");
+        System.out.println("  [INFO] 外部通信なし（INTERNET の権限なし）。ローカル時計と手の補正だけで動作。");
         assertTrue("完全オフライン自律運用可能", true);
     }
 

@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * メイン画面。
- * トークン一覧表示、30秒カウントダウンゲージ、クイックNTP同期、各種画面への遷移を統括。
+ * トークン一覧表示、30秒カウントダウンゲージ、各種画面への遷移を統括。
  */
 public class MainActivity extends Activity {
 
@@ -38,7 +38,6 @@ public class MainActivity extends Activity {
     private TextView tvEmptyTitle;
     private TextView tvEmptyDesc;
     private ProgressBar pbTimeCountdown;
-    private Button btnQuickNtp;
     private Button btnSettings;
     private Button btnScan;
     private Button btnManual;
@@ -89,7 +88,6 @@ public class MainActivity extends Activity {
         tvEmptyTitle = (TextView) findViewById(R.id.tv_empty_title);
         tvEmptyDesc = (TextView) findViewById(R.id.tv_empty_desc);
         pbTimeCountdown = (ProgressBar) findViewById(R.id.pb_time_countdown);
-        btnQuickNtp = (Button) findViewById(R.id.btn_quick_ntp);
         btnSettings = (Button) findViewById(R.id.btn_settings);
         btnScan = (Button) findViewById(R.id.btn_main_scan);
         btnManual = (Button) findViewById(R.id.btn_main_manual);
@@ -98,29 +96,6 @@ public class MainActivity extends Activity {
 
         adapter = new TokenAdapter(this);
         lvTokens.setAdapter(adapter);
-
-        // クイックNTP同期
-        btnQuickNtp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, getString(R.string.toast_ntp_connecting), Toast.LENGTH_SHORT).show();
-                timeSyncManager.syncWithNtp(null, new TimeSyncManager.SyncCallback() {
-                    @Override
-                    public void onSuccess(long offsetMs) {
-                        int sec = (int) (offsetMs / 1000L);
-                        String sign = sec >= 0 ? "+" : "";
-                        Toast.makeText(MainActivity.this, getString(R.string.toast_ntp_success_format, sign, sec), Toast.LENGTH_LONG).show();
-                        updateHeaderOffset();
-                        adapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onError(String errorMessage) {
-                        Toast.makeText(MainActivity.this, getString(R.string.toast_ntp_failed_format, errorMessage), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-        });
 
         // 設定画面
         btnSettings.setOnClickListener(new View.OnClickListener() {
@@ -156,8 +131,6 @@ public class MainActivity extends Activity {
         layoutMainHeader.setBackgroundColor(ThemeManager.getSurfaceColor(this));
         tvMainTitle.setTextColor(ThemeManager.getTextPrimaryColor(this));
 
-        setBackgroundPreservingPadding(btnQuickNtp, ThemeManager.getBtnSecondaryBgRes(this));
-        btnQuickNtp.setTextColor(ThemeManager.getSecondaryButtonTextColor(this));
         setBackgroundPreservingPadding(btnSettings, ThemeManager.getBtnSecondaryBgRes(this));
         btnSettings.setTextColor(ThemeManager.getSecondaryButtonTextColor(this));
 

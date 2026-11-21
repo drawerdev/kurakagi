@@ -2,8 +2,6 @@
 <!-- applicationId・versionCode・versionName・minSdk・targetSdk は app/build.gradle にある -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- 任意: SNTP 時刻補正用（完全オフライン運用時は不使用でも動作可能） -->
-    <uses-permission android:name="android.permission.INTERNET" />
     <!-- QR コード読み取り用 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- スキャン成功時の触覚フィードバック -->
@@ -31,7 +29,7 @@
         android:theme="@style/Theme.Kurakagi"
         android:allowBackup="false">
 
-        <!-- メイン画面（トークン一覧・3連コード表示・残り秒数・クイックNTP） -->
+        <!-- メイン画面（トークン一覧・3連コード表示・残り秒数） -->
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"

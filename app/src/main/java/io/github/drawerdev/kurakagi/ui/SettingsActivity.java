@@ -61,13 +61,11 @@ public class SettingsActivity extends Activity {
     private View layoutOffsetBox;
     private TextView tvOffsetLabel;
     private TextView tvCurrentOffset;
-    private TextView tvNtpStatus;
     private Button btnM10;
     private Button btnM1;
     private Button btnP1;
     private Button btnP10;
     private Button btnReset;
-    private Button btnNtp;
 
     private View layoutBackupCard;
     private TextView tvBackupTitle;
@@ -223,13 +221,11 @@ public class SettingsActivity extends Activity {
         layoutOffsetBox = findViewById(R.id.layout_settings_offset_box);
         tvOffsetLabel = (TextView) findViewById(R.id.tv_settings_offset_label);
         tvCurrentOffset = (TextView) findViewById(R.id.tv_settings_current_offset);
-        tvNtpStatus = (TextView) findViewById(R.id.tv_settings_ntp_status);
         btnM10 = (Button) findViewById(R.id.btn_offset_m10);
         btnM1 = (Button) findViewById(R.id.btn_offset_m1);
         btnP1 = (Button) findViewById(R.id.btn_offset_p1);
         btnP10 = (Button) findViewById(R.id.btn_offset_p10);
         btnReset = (Button) findViewById(R.id.btn_offset_reset);
-        btnNtp = (Button) findViewById(R.id.btn_settings_ntp);
 
         layoutBackupCard = findViewById(R.id.layout_settings_backup_card);
         tvBackupTitle = (TextView) findViewById(R.id.tv_settings_backup_title);
@@ -300,10 +296,6 @@ public class SettingsActivity extends Activity {
 
         setBackgroundKeepPadding(btnReset, compactBtnBgRes);
         btnReset.setTextColor(headerBtnText);
-
-        setBackgroundKeepPadding(btnNtp, primaryBtnBgRes);
-        btnNtp.setTextColor(primaryBtnText);
-        tvNtpStatus.setTextColor(textMuted);
 
         tvBackupTitle.setTextColor(textPrimary);
         tvBackupDesc.setTextColor(textMuted);
@@ -405,31 +397,6 @@ public class SettingsActivity extends Activity {
                 timeSyncManager.resetOffset();
                 updateOffsetDisplay();
                 Toast.makeText(SettingsActivity.this, R.string.toast_offset_reset, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // NTP 同期
-        btnNtp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvNtpStatus.setText(R.string.ntp_status_connecting);
-                tvNtpStatus.setTextColor(ThemeManager.getAccentPrimaryColor(SettingsActivity.this));
-                timeSyncManager.syncWithNtp(null, new TimeSyncManager.SyncCallback() {
-                    @Override
-                    public void onSuccess(long offsetMs) {
-                        int sec = (int) (offsetMs / 1000L);
-                        String sign = sec >= 0 ? "+" : "";
-                        tvNtpStatus.setText(getString(R.string.ntp_status_success_format, sign, sec));
-                        tvNtpStatus.setTextColor(ThemeManager.getTimerSafeColor(SettingsActivity.this));
-                        updateOffsetDisplay();
-                    }
-
-                    @Override
-                    public void onError(String errorMessage) {
-                        tvNtpStatus.setText(getString(R.string.ntp_status_error_format, errorMessage));
-                        tvNtpStatus.setTextColor(ThemeManager.getTimerDangerColor(SettingsActivity.this));
-                    }
-                });
             }
         });
 

@@ -6,8 +6,8 @@ Kurakagi is an offline two-factor authentication (TOTP) app that runs from Andro
 It turns an old phone into a dedicated, offline device for your one-time codes.
 It is written in plain Java with the standard Android View toolkit, so it runs on very old devices.
 
-- No ads, no tracking. The only network use is the clock sync (SNTP), and only when you press the button. Your keys are never sent.
-- Shows three codes at once (previous, current, next 30 seconds), so a phone whose clock is a little off still works. The clock can also be corrected by hand (±1 s / ±10 s).
+- No ads, no tracking. No network use at all (no INTERNET permission). Your keys are never sent.
+- Shows three codes at once (previous, current, next 30 seconds), so a phone whose clock is a little off still works. If the clock is off, set the offset by hand in Settings (±1 s / ±10 s).
 - Add accounts by scanning a QR code or by typing the secret. Show an account's secret or its QR code again to copy it to another device.
 - Encrypted backup of all accounts to one file (always password-protected).
 - English and Japanese.
@@ -31,7 +31,6 @@ On Android 2.x–4.x, download the APK on a PC or another phone, then copy it to
 
 | Permission | Why |
 |---|---|
-| `android.permission.INTERNET` | Clock sync only: an SNTP request to `pool.ntp.org` (UDP port 123) when you press the NTP button. Nothing else uses the network. |
 | `android.permission.CAMERA` | Scanning `otpauth://` QR codes to add an account. The camera is optional; you can add accounts by hand. |
 | `android.permission.VIBRATE` | A short vibration when a QR code is read. |
 | `android.permission.READ_EXTERNAL_STORAGE`, `WRITE_EXTERNAL_STORAGE` | Android 4.3 and older only (`maxSdkVersion` 18): reading and writing encrypted backups in the `Kurakagi` folder on the SD card. Android 4.4 and later use the system file picker and do not ask for this. |
@@ -43,7 +42,7 @@ On Android 2.x–4.x, download the APK on a PC or another phone, then copy it to
 | Keys on the phone | Stored in the app's private storage (`MODE_PRIVATE`). Cloud auto-backup is off (`allowBackup="false"`). | **The keys are not encrypted.** Android 2.x–4.2 has no safe place to keep a key (Keystore). A rooted phone, an unlocked phone, or someone holding the phone can read them. |
 | Backup file | Format v2: PBKDF2-HMAC-SHA256 (60,000 iterations by default; the count is stored in the file) → AES-256-CBC → HMAC-SHA256 to detect tampering (encrypt-then-MAC). The MAC is checked before decrypting. | A weak password can be guessed. The iteration count is chosen to take a few seconds on old phones, which is lower than current recommendations. |
 | Screens that show a secret | `FLAG_SECURE` blocks screenshots, screen recording and the recent-apps thumbnail. | Someone photographing the screen with another camera. |
-| Network | Only the SNTP clock sync (UDP 123, `pool.ntp.org`), and only when you press the button. Keys are never sent. | SNTP replies are not authenticated, so a fake time can shift the codes (the keys do not leak). |
+| Network | None. The app has no INTERNET permission. | If the phone's clock drifts, the codes drift too; fix it with the manual offset in Settings. |
 
 Old phones no longer get security updates. Kurakagi is meant to be used as a dedicated key device that stays off the network.
 
@@ -76,7 +75,7 @@ or the `ANDROID_HOME` environment variable).
 The APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
 The debug build installs as `io.github.drawerdev.kurakagi.debug`, next to the release build, so it never replaces your real accounts.
 
-`gradlew test` runs `CoreTestRunner` (RFC 4226/6238, Base32, backup format v2 including tamper detection, PBKDF2-HMAC-SHA256, QR, SNTP and more) and `ComprehensiveVerificationTest`.
+`gradlew test` runs `CoreTestRunner` (RFC 4226/6238, Base32, backup format v2 including tamper detection, PBKDF2-HMAC-SHA256, QR and more) and `ComprehensiveVerificationTest`.
 `gradlew lint` fails when code uses an API newer than Android 2.1 without a version check (`NewApi`).
 
 Release signing: the keystore and its passwords are not in this repository.
@@ -125,8 +124,8 @@ Kurakagi は、Android 2.1 から動く、オフラインの 2 段階認証（TO
 古いスマホを、ワンタイムのコード専用の、ネットにつながない端末として使えるようにします。
 Java と Android の標準の部品（View）だけで書いているので、とても古い端末でも動きます。
 
-- 広告・追跡なし。通信は時刻合わせ（SNTP）だけで、ボタンを押したときだけです。鍵は送りません。
-- 3 つのコード（30 秒前・今・30 秒後）を同時に出すので、時計が少しずれた端末でも使えます。時計は手でも直せます（±1 秒・±10 秒）。
+- 広告・追跡なし。通信しません（INTERNET の権限なし）。鍵は送りません。
+- 3 つのコード（30 秒前・今・30 秒後）を同時に出すので、時計が少しずれた端末でも使えます。時刻がずれたら、設定の手の補正で直します（±1 秒・±10 秒）。
 - QR コードの読み取りか、シークレットの手入力でアカウントを足せます。登録したアカウントのシークレットや QR コードを出して、別の端末へ写せます。
 - 全部のアカウントを 1 つのファイルに暗号化して書き出せます（必ずパスワードで守ります）。
 - 英語と日本語。
@@ -150,7 +149,6 @@ Android 2.x〜4.x では、PC や別のスマホで APK を保存してから、
 
 | 権限 | 使う理由 |
 |---|---|
-| `android.permission.INTERNET` | 時刻合わせだけ。NTP のボタンを押したときに `pool.ntp.org`（UDP 123）へ SNTP で問い合わせます。ほかには通信しません。 |
 | `android.permission.CAMERA` | `otpauth://` の QR コードを読んでアカウントを足すため。カメラが無くても、手入力で足せます。 |
 | `android.permission.VIBRATE` | QR コードを読めたときに、短く震わせるため。 |
 | `android.permission.READ_EXTERNAL_STORAGE`・`WRITE_EXTERNAL_STORAGE` | Android 4.3 以前だけ（`maxSdkVersion` 18）。SD カードの `Kurakagi` フォルダに、暗号化したバックアップを読み書きするため。4.4 以降はシステムのファイル選択画面を使うので、この権限は求めません。 |
@@ -162,7 +160,7 @@ Android 2.x〜4.x では、PC や別のスマホで APK を保存してから、
 | 端末の中の鍵 | アプリ専用の領域（`MODE_PRIVATE`）に保存。クラウドへの自動バックアップは無効（`allowBackup="false"`） | **暗号化はしていない。** Android 2.x〜4.2 には鍵を安全に預ける仕組み（Keystore）が無いため。root 化した端末、ロックを解除した端末、端末を手にした攻撃者からは読める |
 | バックアップのファイル | 形式 v2: PBKDF2-HMAC-SHA256（既定 60,000 回、回数はファイルに記録）→ AES-256-CBC で暗号化 → HMAC-SHA256 で改ざんを検出（encrypt-then-MAC）。MAC を確かめてから復号する | パスワードが弱ければ総当たりされうる。回数は古い端末で数秒に収まるよう選んだ値で、最新の推奨値より少ない |
 | シークレットの画面 | `FLAG_SECURE` でスクリーンショット・録画・最近使ったアプリの縮図を禁止 | 別のカメラで画面を撮られることは防げない |
-| 通信 | NTP の時刻合わせ（UDP 123、`pool.ntp.org`）だけ。ボタンを押したときだけ通信する。鍵は送らない | NTP の応答は認証されないので、偽の時刻を返されるとコードがずれる（鍵は漏れない） |
+| 通信 | 通信しない。INTERNET の権限なし | 端末の時計がずれるとコードもずれる。設定の手の補正で直す |
 
 古い端末の OS には、もうセキュリティ更新が来ません。Kurakagi は「ネットにつながない、専用の鍵の端末」として使う前提で作っています。
 
@@ -194,7 +192,7 @@ Android 2.x〜4.x は未確認です。動いた・動かなかった報告を�
 APK は `app/build/outputs/apk/debug/app-debug.apk` にできます。
 デバッグ版は `io.github.drawerdev.kurakagi.debug` として、リリース版と並べて入ります（リリース版の中のアカウントを上書きしません）。
 
-`gradlew test` は `CoreTestRunner`（RFC 4226/6238、Base32、バックアップ形式 v2 と改ざんの検出、PBKDF2-HMAC-SHA256、QR、SNTP など）と `ComprehensiveVerificationTest` を走らせます。
+`gradlew test` は `CoreTestRunner`（RFC 4226/6238、Base32、バックアップ形式 v2 と改ざんの検出、PBKDF2-HMAC-SHA256、QR など）と `ComprehensiveVerificationTest` を走らせます。
 `gradlew lint` は、Android 2.1 より新しい API を版の確認なしで使うと止まります（`NewApi`）。
 
 リリース版の署名: 鍵とパスワードはリポジトリに置きません。`~/.gradle/gradle.properties`（または同じ名前の環境変数）に次の 4 つを書きます。

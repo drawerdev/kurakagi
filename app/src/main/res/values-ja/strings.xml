@@ -18,9 +18,7 @@
     <string name="empty_accounts_desc">下のボタンからQRコードをスキャンするか、\nシークレットを手動で入力して登録してください。</string>
     <string name="btn_scan_qr">QRスキャン追加</string>
     <string name="btn_manual_add">手動で追加</string>
-    <string name="btn_quick_ntp">NTP</string>
     <string name="btn_settings">設定</string>
-    <string name="btn_time_sync">NTP時刻同期</string>
     <string name="time_offset_label">時刻オフセット:</string>
     <string name="time_offset_status_ok">正確 (±0s)</string>
     <string name="header_offset_ok">補正: ±0s (正確)</string>
@@ -41,9 +39,6 @@
     <string name="slot_next_suffix">%s (次スロット)</string>
     <string name="copied_to_clipboard">コードをコピーしました: %s</string>
     <string name="toast_code_copied_format">%1$s のコード [%2$s] をコピーしました</string>
-    <string name="toast_ntp_connecting">NTPサーバー (pool.ntp.org) に接続中...</string>
-    <string name="toast_ntp_success_format">時刻補正完了: %1$s%2$d 秒</string>
-    <string name="toast_ntp_failed_format">NTP同期失敗: %s\n(オフラインまたはWi-Fi未接続)</string>
     <string name="toast_camera_permission_required">QRコードスキャンにはカメラの許可が必要です</string>
 
     <!-- スキャン画面 -->
@@ -114,12 +109,7 @@
     <string name="btn_offset_plus_1">+1秒</string>
     <string name="btn_offset_plus_10">+10秒</string>
     <string name="btn_offset_reset">オフセットをリセット</string>
-    <string name="btn_settings_ntp">NTP時刻同期 (pool.ntp.org)</string>
-    <string name="settings_ntp_hint">※Wi-Fi接続時にタップすると正確な時刻と自動同期します</string>
     <string name="toast_offset_reset">オフセットをリセットしました (±0秒)</string>
-    <string name="ntp_status_connecting">NTP サーバー (pool.ntp.org) に接続中...</string>
-    <string name="ntp_status_success_format">同期成功: %1$s%2$d 秒のズレを自動補正しました</string>
-    <string name="ntp_status_error_format">同期失敗: %s (オフライン時は手動ステッパーをご利用ください)</string>
 
     <!-- 設定画面: SDカードバックアップ & 復元 -->
     <string name="settings_backup_title">暗号化バックアップと復元</string>
@@ -176,7 +166,7 @@
     <string name="about_official_heading">公式の入手先</string>
     <string name="about_official_warning">ここ以外から入れたものは、偽物の可能性があります。</string>
     <string name="about_app_heading">このアプリについて</string>
-    <string name="about_app_promise">通信は時刻合わせ（pool.ntp.org への SNTP）だけで、NTP のボタンを押したときだけです。鍵は送りません。広告・追跡なし。</string>
+    <string name="about_app_promise">このアプリは通信しません（INTERNET の権限なし）。鍵はこの端末から出ません。広告・追跡なし。</string>
     <string name="about_trust_offline">• コードはこの端末の中で計算します。インターネットにつなぐ必要はありません。</string>
     <string name="about_trust_storage">• 保存: 鍵はこのアプリ専用の領域に保存します。暗号化はしていません（古い Android には鍵を守る仕組みが無いため）。ほかのアプリからは読めませんが、root 化した端末やロックを解除された端末からは読めます。クラウドへの自動バックアップは無効です。バックアップは必ずパスワードで暗号化します。</string>
     <string name="about_report_heading">問題の報告</string>

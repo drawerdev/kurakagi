@@ -3,7 +3,6 @@ package io.github.drawerdev.kurakagi;
 import io.github.drawerdev.kurakagi.core.Base32;
 import io.github.drawerdev.kurakagi.core.OtpUriParser;
 import io.github.drawerdev.kurakagi.core.TotpCore;
-import io.github.drawerdev.kurakagi.net.SntpClient;
 import io.github.drawerdev.kurakagi.qr.QrEncoder;
 import io.github.drawerdev.kurakagi.qr.QrMatrix;
 import io.github.drawerdev.kurakagi.qr.QrYuvDecoder;
@@ -54,7 +53,6 @@ public class CoreTestRunner {
         testBackupFormatV2Security();
         testQrEncoder();
         testQrYuvDecoder();
-        testSntpPacketParsing();
 
         System.out.println("=================================================");
         System.out.println("Tests Run:    " + testsRun);
@@ -531,38 +529,6 @@ public class CoreTestRunner {
         } catch (Exception e) {
             testsFailed++;
             System.err.println("[FAIL] QrYuvDecoder exception: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private static void testSntpPacketParsing() {
-        System.out.println("\n--- 9. Testing SntpClient Packet Structure & Calculation ---");
-        try {
-            byte[] buffer = new byte[48];
-            buffer[0] = 0x24; // LI=0, VN=4, Mode=4 (Server)
-            buffer[1] = 1;    // Stratum 1
-
-            long t1Ms = 1700000000000L;
-            long t2Ms = 1700000000050L;
-            long t3Ms = 1700000000060L;
-            long t4Ms = 1700000000120L;
-
-            // Write timestamps
-            SntpClient.writeTimeStamp(buffer, 24, t1Ms); // Originate (T1)
-            SntpClient.writeTimeStamp(buffer, 32, t2Ms); // Receive (T2)
-            SntpClient.writeTimeStamp(buffer, 40, t3Ms); // Transmit (T3)
-
-            SntpClient.SntpResult res = SntpClient.parseResponse(buffer, t1Ms, t4Ms);
-            assertTrue("SNTP result not null", res != null);
-
-            // Clock offset = ((T2 - T1) + (T3 - T4)) / 2 = ((50) + (-60)) / 2 = -5 ms (±1ms due to fixed-point fraction rounding)
-            // Round trip delay = (T4 - T1) - (T3 - T2) = 120 - 10 = 110 ms
-            assertTrue("SNTP clock offset calculation within 1ms tolerance", Math.abs(res.clockOffset - (-5L)) <= 1);
-            assertTrue("SNTP roundtrip calculation within 1ms tolerance", Math.abs(res.roundTripTime - 110L) <= 1);
-
-        } catch (Exception e) {
-            testsFailed++;
-            System.err.println("[FAIL] SntpClient exception: " + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -11,7 +11,7 @@ Kurakagi is an offline two-factor authentication (TOTP) app for old Android phon
 <b>What it does not do</b>
 <ul>
 <li>No ads, no tracking.</li>
-<li>The only network use is the clock sync (SNTP to pool.ntp.org), and only when you press the NTP button. Your keys are never sent.</li>
+<li>No network use at all (no INTERNET permission). Your keys are never sent. If the clock is off, set the offset by hand in Settings.</li>
 <li>The keys on the phone are kept in the app's private storage but are not encrypted: old Android has no safe place to keep a key. A rooted or unlocked phone can read them. Use the phone as a dedicated device that stays off the network.</li>
 </ul>
 
