@@ -1,6 +1,6 @@
 # Kurakagi 詳細仕様書
 
-**バージョン**: 1.0.0 (`versionCode: 1`)  
+**バージョン**: 1.1.0 (`versionCode: 3`)  
 **パッケージ名**: `io.github.drawerdev.kurakagi`  
 **対応 OS**: Android 2.1 (API 7) 〜 Android 14 (API 34)  
 
@@ -136,7 +136,7 @@
 ## 6. ビルド・テスト・実機検証結果
 
 ### 6.1 ビルド (Gradle)
-- Gradle 8.13（Wrapper を同梱）＋ Android Gradle Plugin 8.13.2。`compileSdk 34`・`minSdk 7`・`targetSdk 34`・`versionCode 2`・`versionName 1.0.1`
+- Gradle 8.13（Wrapper を同梱）＋ Android Gradle Plugin 8.13.2。`compileSdk 34`・`minSdk 7`・`targetSdk 34`・`versionCode 3`・`versionName 1.1.0`
 - Java 8 のソース・バイトコードで書き、D8 が `min-api 7` で 1 つの `classes.dex` にする（コードの縮小・難読化はしない）
 - ZXing は Maven Central の `com.google.zxing:core:2.3.0`（1.0.1 まで同梱していた jar と同じ物。SHA-256 で確認）
 - リリース版の署名: v1 (JAR) + v2 + v3。鍵とパスワードは `~/.gradle/gradle.properties` の `KURAKAGI_*` から読み、無ければ署名なしの APK を作る

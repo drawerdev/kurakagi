@@ -1,4 +1,4 @@
-First public release (1.0.1).
+First public release (1.1.0).
 - Offline TOTP codes, three at a time (previous, current, next).
 - Add accounts by QR code or by hand. Show a secret or QR code again to move it to another device.
 - Encrypted backup (format v2 with tamper detection). 1.0.0 backups can still be read.
