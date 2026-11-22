@@ -115,20 +115,19 @@
                     android:textSize="11sp"
                     android:layout_marginBottom="12dp" />
 
-                <!-- QR表示枠（白背景・パディング） -->
+                <!-- QR表示枠（白背景）。4 マスの余白は QR の絵の中にある -->
                 <LinearLayout
                     android:id="@+id/layout_qr_box"
                     android:layout_width="220dp"
                     android:layout_height="220dp"
                     android:gravity="center"
                     android:background="@color/qr_white_bg"
-                    android:padding="10dp"
                     android:layout_marginBottom="12dp">
 
                     <ImageView
                         android:id="@+id/iv_detail_qr"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
+                        android:layout_width="220dp"
+                        android:layout_height="220dp"
                         android:scaleType="fitCenter" />
                 </LinearLayout>
 

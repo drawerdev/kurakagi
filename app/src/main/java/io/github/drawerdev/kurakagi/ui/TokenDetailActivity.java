@@ -29,6 +29,11 @@ public class TokenDetailActivity extends Activity {
 
     public static final String EXTRA_ACCOUNT_ID = "extra_account_id";
 
+    /** QR の周りの余白（マス）。規格の最小値。 */
+    private static final int QR_QUIET_ZONE = 4;
+    /** QR の枠の 1 辺（activity_token_detail.xml の layout_qr_box と同じ）。 */
+    private static final int QR_BOX_DP = 220;
+
     private View layoutDetailRoot;
     private View layoutDetailHeader;
     private TextView tvDetailTitle;
@@ -201,29 +206,13 @@ public class TokenDetailActivity extends Activity {
             String uri = OtpUriParser.toUri(currentAccount);
             QrMatrix matrix = QrEncoder.encode(uri, QrEncoder.ErrorCorrectionLevel.L);
             if (matrix != null) {
-                int width = matrix.getWidth();
-                int height = matrix.getHeight();
-                // 320x480 小型端末でも美しく収まるようにスケールを最適化
-                int scale = 4;
-                if (width * 4 > 220) {
-                    scale = 3;
-                }
-                int bmpWidth = width * scale;
-                int bmpHeight = height * scale;
-
-                int[] pixels = new int[bmpWidth * bmpHeight];
-                for (int y = 0; y < height; y++) {
-                    for (int x = 0; x < width; x++) {
-                        int color = matrix.get(x, y) ? Color.BLACK : Color.WHITE;
-                        for (int sy = 0; sy < scale; sy++) {
-                            for (int sx = 0; sx < scale; sx++) {
-                                pixels[(y * scale + sy) * bmpWidth + (x * scale + sx)] = color;
-                            }
-                        }
-                    }
-                }
-
-                Bitmap bitmap = Bitmap.createBitmap(pixels, bmpWidth, bmpHeight, Bitmap.Config.RGB_565);
+                // 余白（quiet zone）は規格どおり 4 マス。絵の中に入れるので、表示の大きさが変わっても保たれる
+                int modules = matrix.getWidth() + 2 * QR_QUIET_ZONE;
+                int boxPx = Math.round(QR_BOX_DP * getResources().getDisplayMetrics().density);
+                int scale = Math.max(1, boxPx / modules);
+                int side = modules * scale;
+                int[] pixels = matrix.toPixelArray(scale, QR_QUIET_ZONE, Color.BLACK, Color.WHITE);
+                Bitmap bitmap = Bitmap.createBitmap(pixels, side, side, Bitmap.Config.RGB_565);
                 ivQr.setImageBitmap(bitmap);
             }
         } catch (Exception e) {

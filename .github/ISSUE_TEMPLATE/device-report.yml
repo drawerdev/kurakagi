@@ -1,0 +1,66 @@
+name: "Device report / 動作の報告"
+description: "Tell us whether Kurakagi works on your phone / この機種で Kurakagi が動いたかを知らせる"
+title: "[Device] <phone model> / Android <version>"
+labels: ["device-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a one-person project. Replies may be slow (usually on weekends). Please do not write personal info (email, phone number, real name). You can write in English or Japanese.
+
+        Never paste a secret, a QR code or an account name.
+
+        一人で作っています。返事が遅くなることがあります（たいてい週末です）。個人の情報（メールアドレス・電話番号・本名）は書かないでください。日本語でも英語でも大丈夫です。
+
+        シークレット・QR コード・アカウントの名前は、貼らないでください。
+  - type: input
+    id: model
+    attributes:
+      label: "Phone model / 機種"
+      placeholder: "e.g. SO-03D / 例: SO-03D"
+    validations:
+      required: true
+  - type: input
+    id: android
+    attributes:
+      label: "Android version / Android の版"
+      placeholder: "e.g. 4.0.4"
+    validations:
+      required: true
+  - type: input
+    id: app_version
+    attributes:
+      label: "App version / アプリの版"
+      description: "Shown in the app's About screen / アプリの「情報」の画面に出ています"
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: "Result / 結果"
+      options:
+        - "Works / 動いた"
+        - "Partly works / 一部だけ動いた"
+        - "Does not work / 動かない"
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: "What you tried / 試したこと"
+    validations:
+      required: false
+  - type: textarea
+    id: problem
+    attributes:
+      label: "What went wrong (if anything) / 起きたこと（動かなかったとき）"
+      description: "If the app has \"Copy error report\" in About, paste it here / 「情報」の画面に「エラー報告をコピー」があれば、ここに貼ってください"
+    validations:
+      required: false
+  - type: checkboxes
+    id: table
+    attributes:
+      label: "Device table / 動作の表"
+      options:
+        - label: "You may add this phone to the user reports table in the README / README の利用者の報告の表に、この機種を載せてかまいません"
+          required: false

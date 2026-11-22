@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "No GitHub account? / GitHub のアカウントが無い方"
+    url: "https://drawerdev.github.io/r/"
+    about: "Send a report through the form (all apps) / フォームから報告できます（全アプリ共通）"

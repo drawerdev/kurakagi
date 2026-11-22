@@ -20,7 +20,7 @@ Copies from anywhere else may be fake.
 
 On Android 2.x–4.x, download the APK on a PC or another phone, then copy it to the device.
 
-## Supported range
+## Designed for
 
 | | |
 |---|---|
@@ -53,14 +53,25 @@ Old phones no longer get security updates. Kurakagi is meant to be used as a ded
 - Kurakagi can still read 1.0.0 backups (encrypted format v1) and plain JSON from early test versions. After reading a plain file, it asks you to delete it.
 - Backups made with a different PBKDF2 iteration count can still be read, because the count is stored in the file.
 
-## Tested on
+## Tested by the author
 
-| Device | Android | Date |
-|---|---|---|
-| Vodafone VFD 200 | 5.1 | — (1.0.1 not yet checked) |
-| Sony Xperia acro HD | 4.0.4 | 2026-11-21 |
+| Device | Android | How | What was checked | Date |
+|---|---|---|---|---|
+| Sony Xperia acro HD (SO-03D) | 4.0.4 | real phone | Everything: adding by QR and by hand, codes, showing the QR and the secret, encrypted backup and restore. Encrypting takes about 3–4 seconds. | 2026-11 |
+| Vodafone VFD 200 | 5.1 | real phone | Scanning a QR code, the About screen | 2026-11 |
+| Sony Xperia Z5 Compact (SO-02H) | 7.0 | real phone | Launch, scanning a QR code | 2026-11 |
+| Sony Xperia X Compact (SO-02J) | 8.0 | real phone | Launch | 2026-11 |
+| Emulator | 2.3.7 | emulator | Launch, adding by hand, codes, showing the QR, encrypted backup to the SD card and restore, a wrong password is refused, the scan screen opens | 2026-11 |
 
-Android 2.x–3.x has not been tested yet. Reports of whether it works are welcome.
+Not checked on a real phone yet: anything on Android 2.x, including how long encryption takes and scanning QR codes with the camera. Android 3.x has not been checked at all.
+
+## Reports from users
+
+| Device | Android | Result | Report | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+Does it work on your phone? Tell us with the "Device report" issue form, or the form at <https://drawerdev.github.io/>.
 
 ## Build
 
@@ -139,7 +150,7 @@ Java と Android の標準の部品（View）だけで書いているので、�
 
 Android 2.x〜4.x では、PC や別のスマホで APK を保存してから、端末へ送ってください。
 
-## 対応範囲
+## 設計の対象
 
 | | |
 |---|---|
@@ -172,14 +183,25 @@ Android 2.x〜4.x では、PC や別のスマホで APK を保存してから、
 - 1.0.0 の暗号化バックアップ（形式 v1）と、初期の試験版の平文の JSON も読み込めます。平文のファイルを読み込んだときは、削除を促します。
 - PBKDF2 の回数はファイルに記録するので、回数の違うバックアップも読めます。
 
-## 動作確認済み
+## 作者が確かめた範囲
 
-| 機種 | Android | 日付 |
-|---|---|---|
-| Vodafone VFD 200 | 5.1 | —（1.0.1 は確認待ち） |
-| Sony Xperia acro HD | 4.0.4 | 2026-11-21 |
+| 機種 | Android | 確かめ方 | 何を確かめたか | 日付 |
+|---|---|---|---|---|
+| Sony Xperia acro HD（SO-03D） | 4.0.4 | 実機 | 一通り: QR と手入力での登録、コード、QR とシークレットの表示、暗号化バックアップの書き出しと読み込み。暗号化は 3〜4 秒ほど | 2026-11 |
+| Vodafone VFD 200 | 5.1 | 実機 | QR の読み取り、「情報」の画面 | 2026-11 |
+| Sony Xperia Z5 Compact（SO-02H） | 7.0 | 実機 | 起動、QR の読み取り | 2026-11 |
+| Sony Xperia X Compact（SO-02J） | 8.0 | 実機 | 起動 | 2026-11 |
+| エミュレーター | 2.3.7 | エミュレーター | 起動、手入力での登録、コード、QR の表示、SD カードへの暗号化バックアップと読み込み、違うパスワードを断ること、読み取りの画面が開くこと | 2026-11 |
 
-Android 2.x〜3.x は未確認です。動いた・動かなかった報告を歓迎します。
+実機ではまだ確かめていないもの: Android 2.x のすべて（暗号化にかかる時間、カメラでの QR の読み取りを含む）。Android 3.x は、まったく確かめていません。
+
+## 利用者の報告
+
+| 機種 | Android | 結果 | 報告 | 日付 |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+お使いの端末で動きましたか？ Issue の「動作の報告」か、<https://drawerdev.github.io/> のフォームで知らせてください。
 
 ## ビルド
 
