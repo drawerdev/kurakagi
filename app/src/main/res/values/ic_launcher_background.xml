@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Adaptive icon background: the master's background colour (art/icon/kurakagi-icon.svg). -->
+<resources>
+    <color name="ic_launcher_background">#1E3A8A</color>
+</resources>

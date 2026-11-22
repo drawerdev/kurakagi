@@ -33,6 +33,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class TokenStorage {
 
     /** v1 (legacy, read-only): magic | salt | iv | AES-128-CBC ciphertext. PBKDF2-HMAC-SHA1, 10,000 rounds. No MAC. */
+    // Left over from the prototype's name; kept as is so existing backups still read.
     private static final byte[] MAGIC_HEADER = asciiBytes("RETROAUTH_ENC1");
     /**
      * v2 (written by this version): magic | iterations (4 bytes, big endian) | salt | iv | ciphertext | mac.
